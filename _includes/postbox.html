@@ -2,7 +2,7 @@
 {% assign author = site.authors[post.author] %}
 <article class="blog-post hentry index-post post-{{ forloop.index0 }}">
 <a class="entry-image-wrap is-image" href="{{ post.url | absolute_url }}" title="{{ post.title }}">
-{% if post.image %}<span class="entry-thumb lazy-ify" data-image="{{ site.baseurl }}/{{ post.image }}"></span>{% endif %}
+{% if post.image %}<span class="entry-thumb lazy-ify" data-image="{{ post.image }}" style="background-image:url({{ post.image }})"></span>{% endif %}
 </a>
 <div class="entry-header">
 <span class="entry-category">Apple</span>
