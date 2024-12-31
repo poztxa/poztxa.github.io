@@ -4,7 +4,7 @@
 {% if post.image %}<span class="entry-thumb lazy-ify" data-image="{{ post.image }}" style="background-image:url({{ post.image }})"></span>{% endif %}
 </a>
 <div class="entry-header">
-<span class="entry-category">Apple</span>
+<span class="entry-category">{{ post.categories[0] }}</span>
 <h2 class="entry-title"><a class="entry-title-link" href="{{ site.baseurl }}{{ post.url }}" rel="bookmark" title="{{ post.title }}">{{ post.title }}</a></h2>
 <p class="entry-excerpt excerpt">{{ post.excerpt | strip_html | truncatewords:15 }}</p>
 <div class="entry-meta">
