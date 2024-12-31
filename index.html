@@ -21,11 +21,7 @@ background: '/img/bg-index.jpg'
               {% for post in site.posts limit:6 %}
                 <div class="trending-item item-{{ forloop.index0 }}">
                   <a class="entry-image-wrap {{ post.featured_image ? 'is-image' : 'is-video' }}" href="{{ post.url }}" title="{{ post.title }}">
-                    {% if post.featured_image %}
-                      <span class="entry-thumb" style="background-image:url('{{ post.featured_image }}');"></span>
-                    {% else %}
-                      <span class="entry-thumb" data-image="https://resources.blogblog.com/img/blank.gif"></span>
-                    {% endif %}
+{% if post.image %} <span class="entry-thumb lazy-ify" data-image="{{ post.image }}" style="background-image:url({{ post.image }})"></span> {% endif %}
                     <span class="trending-count">{{ forloop.index }}</span>
                   </a>
                   <div class="entry-header">
