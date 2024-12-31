@@ -93,6 +93,7 @@ background: '/img/bg-index.jpg'
 <section class="row">
   <div class="col-sm-8">
     <div class="row">
+      <div class="blog-posts hfeed index-post-wrap">
       {% for post in paginator.posts %}
       {% unless post.featured == true %}
 
@@ -101,6 +102,7 @@ background: '/img/bg-index.jpg'
       {% endunless %}
       {% endfor %}
     </div>
+      </div>
     <!-- Pagination -->
     <div class="bottompagination">
       <span class="navigation" role="navigation">
