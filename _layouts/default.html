@@ -21,7 +21,7 @@
 {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{% endif %}{% endcapture %}
 <body class="{{ layout }}">
 
-    
+<div id='outer-wrapper'>
 <!-- Menu Navigation
 ================================================== -->
 <header id="header-wrapper">
@@ -114,14 +114,12 @@
        Copyright © {{site.title}}. All rights reserved.
     </div>
 </footer>
-
-<!-- JavaScript
-================================================== -->     
+  
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js' type='text/javascript'></script>
-<script src="{{ site.baseurl }}/assets/js/theme.js"></script>    
-    
+<script src="{{ site.baseurl }}/assets/js/theme.js"></script>  
+  
+</div>
+  
 </body>
-
 {% include analytics.html %}
-
 </html>
