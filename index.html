@@ -93,56 +93,18 @@ background: '/img/bg-index.jpg'
   </div>
 </div>
 
-
-    
-<div class="blog-posts hfeed index-post-wrap">
-  {% for post in paginator.posts %}
-    {% if post.featured == true %}
-      {% assign author = site.authors[post.author] %}
-      <article class="blog-post hentry index-post post-{{ forloop.index0 }}">
-        <a class="entry-image-wrap is-video" href="{{ post.url | absolute_url }}" title="{{ post.title }}">
-          {% if post.image %}
-            <span class="entry-thumb" data-image="{{ site.baseurl }}/{{ post.image }}"></span>
-          {% else %}
-            <!-- Placeholder for posts without images -->
-            <span class="entry-thumb" data-image="{{ site.baseurl }}/assets/placeholder.jpg"></span>
-          {% endif %}
-        </a>
-        <div class="entry-header">
-          <span class="entry-category">Apple</span>
-          <h2 class="entry-title">
-            <a class="entry-title-link" href="{{ post.url | absolute_url }}" rel="bookmark" title="{{ post.title }}">
-              {{ post.title }}
-            </a>
-          </h2>
-          <p class="entry-excerpt excerpt">{{ post.excerpt | strip_html | truncatewords:15 }}</p>
-          <div class="entry-meta">
-            <span class="entry-author">
-              <span class="by">by</span>
-              <span class="author-name">
-                {% if post.author %}
-                  {{ author.display_name }}
-                {% else %}
-                  {{ site.author }}
-                {% endif %}
-              </span>
-            </span>
-            <span class="entry-time">
-              <span class="on">-</span>
-              <time class="published" datetime="{{ post.date | date_to_string }}">
-                {{ post.date | date_to_string }}
-              </time>
-            </span>
-          </div>
-        </div>
-      </article>
-    {% endif %}
-  {% endfor %}
-</div>
-
-    
-
-    
+================================================== -->
+<section class="row">
+  <div class="col-sm-8">
+    <div class="row">
+      {% for post in paginator.posts %}
+      {% unless post.featured == true %}
+      <div class="col-md-6 mb-5">
+        {% include postbox.html %}
+      </div>
+      {% endunless %}
+      {% endfor %}
+    </div>
     <!-- Pagination -->
     <div class="bottompagination">
       <span class="navigation" role="navigation">
