@@ -1,0 +1,72 @@
+# Top Menu
+topmenu:
+
+- title: Home
+  url: ""
+
+- title: About
+  url: "about/"
+
+- title: Music
+  url: "music/"
+
+- title: Gaming
+  url: "gaming/"
+
+- title: Services
+  sublinks:
+
+      title: Social Media
+      url: "services/"
+
+- title: Blogs 
+  sublinks:
+    
+    - title: Travel
+      url: "about/"
+    - title: Food
+      url: "about/"
+    - title: Gaming
+      url: "blog/"
+    - title: Music
+      url: "music/"
+    - title: Marketing
+      url: "blog/"
+    - title: All
+      url: "blog/"
+
+- title: Contact
+  url: "contact/"
+
+- title: Watch Live
+  url: https://www.twitch.tv/summerislive
+  class: "ml-2 btn btn-dark text-white px-3"
+  external: true
+
+# Footer Menu
+footermenu:
+
+- title: Home
+  url: ""
+
+- title: Music
+  url: "music/"
+
+- title: Gaming
+  url: "gaming/"
+
+- title: Services
+  url: "services/"
+
+- title: Blog
+  url: "blog/"
+
+- title: Contact
+  url: "contact/"
+
+- title: Privacy Policy
+  url: "privacy-policy/"
+
+- title: Follow
+  url: https://twitch.tv/summerislive 
+  external: true

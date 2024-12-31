@@ -1,0 +1,45 @@
+---
+title: Blog
+layout: page
+background: '/img/bg-index.jpg'
+permalink: "/blog/"
+comments: false
+---
+<script async src="https://cse.google.com/cse.js?cx=b2bbaa64cd43a7a24"></script>
+<div class="gcse-search"></div>
+
+<!-- Featured
+================================================== -->
+<section class="row">
+  {% for post in site.posts %}
+          <div class="col-md-4 mb-5">
+          {% include postbox.html %}
+          </div>
+  {% endfor %}
+  </div>
+</section>
+
+<!-- Posts List with Sidebar (except featured)
+================================================== -->
+<section class="row">
+  <div class="col-sm-8">
+    <div class="row">
+      {% for post in paginator.posts %}
+      {% unless post.featured == true %}
+      <div class="col-md-6 mb-5">
+        {% include postbox.html %}
+      </div>
+      {% endunless %}
+      {% endfor %}
+    </div>
+    <!-- Pagination -->
+    <div class="bottompagination">
+      <span class="navigation" role="navigation">
+          {% include pagination.html %}
+      </span>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    {% include sidebar.html %}
+  </div>
+</section>
