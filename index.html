@@ -11,6 +11,7 @@ background: '/img/bg-index.jpg'
     <div class="widget PopularPosts" data-version="2" id="PopularPosts1">
       <div class="widget-content">
         <div class="featured-items">
+          <!-- Kolom Kiri (4 Postingan Teratas) -->
           <div class="featured-left">
             {% for post in site.posts limit:4 %}
               {% if forloop.index == 1 %}
@@ -36,7 +37,7 @@ background: '/img/bg-index.jpg'
           </div>
           <div class="featured-right">
             {% for post in site.posts limit:3 offset:1 %}
-              <div class="featured-item item-{{ forloop.index1 }}">
+              <div class="featured-item item-{{ forloop.index0 }}">
                 <a class="entry-image-wrap" href="{{ post.url }}" title="{{ post.title }}">
                   {% if post.featured_image %}
                     <span class="entry-thumb" style="background-image:url({{ post.featured_image | img_url: '72x72' }})"></span>
@@ -60,6 +61,7 @@ background: '/img/bg-index.jpg'
     </div>
   </div>
 </div>
+
 
 <!-- Featured
 ================================================== -->
