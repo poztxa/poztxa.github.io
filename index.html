@@ -36,8 +36,8 @@ background: '/img/bg-index.jpg'
             {% for post in site.posts limit:3 offset:1 %}
               <div class="featured-item item-{{ forloop.index0 | plus:1 }}">
                 <a class="entry-image-wrap" href="{{ post.url }}" title="{{ post.title }}">
-                  {% if post.featured_image %}
-                    <span class="entry-thumb" style="background-image:url({{ post.featured_image | img_url: '72x72' }})"></span>
+                  {% if post.image %}
+                    <span class="entry-thumb" style="background-image:url({{ site.baseurl }}/{{ post.image | img_url: '72x72' }})"></span>
                   {% else %}
                     <span class="entry-thumb" style="background-image:url('https://resources.blogblog.com/img/blank.gif')"></span>
                   {% endif %}
