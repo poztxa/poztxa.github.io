@@ -56,7 +56,7 @@ background: '/img/bg-index.jpg'
   </div>
 </div>
 
-
+<main id='main-wrapper'>
 <div class="trending section" id="trending" name="Trending Posts">
   <div class="widget PopularPosts" data-version="2" id="PopularPosts2">
     <div class="widget-title title-wrap">
@@ -90,9 +90,6 @@ background: '/img/bg-index.jpg'
 </div>
 
 
-<section class="row">
-  <div class="col-sm-8">
-    <div class="row">
       <div class="blog-posts hfeed index-post-wrap">
       {% for post in paginator.posts %}
       {% unless post.featured == true %}
@@ -109,8 +106,9 @@ background: '/img/bg-index.jpg'
           {% include pagination.html %}
       </span>
     </div>
-  </div>
+  </main>
+    
   <div class="col-sm-4">
     {% include sidebar.html %}
   </div>
-</section>
+
