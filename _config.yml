@@ -1,6 +1,7 @@
 title: "SummerisLive"
 email: summerislive@outlook.com
 timezone: UTC
+url: https://poztxa.github.io
 baseurl: ""
 permalink: "/:title/"
 logo: 'assets/images/logo40.png'
