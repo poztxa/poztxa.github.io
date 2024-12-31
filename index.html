@@ -13,28 +13,30 @@ background: '/img/bg-index.jpg'
         <div class="featured-items">
           <div class="featured-left">
             {% for post in site.posts limit:4 %}
-              <div class="featured-item item-{{ forloop.index0 }}">
-                <a class="entry-image-wrap" href="{{ post.url }}" title="{{ post.title }}">
-                  {% if post.featured_image %}
-                    <span class="entry-thumb" style="background-image:url({{ post.featured_image | img_url: '72x72' }})"></span>
-                  {% else %}
-                    <span class="entry-thumb" style="background-image:url('https://resources.blogblog.com/img/blank.gif')"></span>
-                  {% endif %}
-                </a>
-                <div class="entry-header">
-                  {% if post.categories %}
-                    <span class="entry-category">{{ post.categories[0] }}</span>
-                  {% endif %}
-                  <h2 class="entry-title">
-                    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </h2>
+              {% if forloop.index == 1 %}
+                <div class="featured-item item-{{ forloop.index0 }}">
+                  <a class="entry-image-wrap" href="{{ post.url }}" title="{{ post.title }}">
+                    {% if post.featured_image %}
+                      <span class="entry-thumb" style="background-image:url({{ post.featured_image | img_url: '72x72' }})"></span>
+                    {% else %}
+                      <span class="entry-thumb" style="background-image:url('https://resources.blogblog.com/img/blank.gif')"></span>
+                    {% endif %}
+                  </a>
+                  <div class="entry-header">
+                    {% if post.categories %}
+                      <span class="entry-category">{{ post.categories[0] }}</span>
+                    {% endif %}
+                    <h2 class="entry-title">
+                      <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                    </h2>
+                  </div>
                 </div>
-              </div>
+              {% endif %}
             {% endfor %}
           </div>
           <div class="featured-right">
             {% for post in site.posts limit:3 offset:1 %}
-              <div class="featured-item item-{{ forloop.index0 }}">
+              <div class="featured-item item-{{ forloop.index1 }}">
                 <a class="entry-image-wrap" href="{{ post.url }}" title="{{ post.title }}">
                   {% if post.featured_image %}
                     <span class="entry-thumb" style="background-image:url({{ post.featured_image | img_url: '72x72' }})"></span>
@@ -58,8 +60,6 @@ background: '/img/bg-index.jpg'
     </div>
   </div>
 </div>
-
-
 
 <!-- Featured
 ================================================== -->
