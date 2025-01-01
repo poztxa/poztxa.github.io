@@ -102,20 +102,32 @@
       {{ content }}  
 <!-- Footer
 ================================================== -->    
-<footer class="footer container text-center">  
-  <ul class="p-0 mb-1 small">
-    {% for item in site.data.menus.footermenu %}
-    <li>
-      <a href="{% unless item.external %}{{site.baseurl}}/{% endunless %}{{item.url}}" alt="{{item.title}}">{{item.title}}</a>
-    </li>
-    {% endfor %}
-    </ul>
-    <div class="copyright small">
-       Copyright © {{site.title}}. All rights reserved.
+  <footer id="footer-wrapper">
+    <div class="primary-footer flex-center">
+      <div class="container row-x1">
+        <div class="supermag-pro-about-section section">
+          {% include footer-logo.html %}
+        </div>
+        <div class="supermag-pro-social-section">
+          {% include social-links.html %}
+        </div>
+      </div>
     </div>
-</footer>
+
+    <div class="footerbar flex-center">
+      <div class="container row-x1">
+        <div class="footer-copyright section">
+          <div class="widget Text">
+            Design by - <a href="https://www.templateify.com/" rel="noopener noreferrer" target="_blank">Blogger Templates</a>
+          </div>
+        </div>
+        <div class="footer-menu section">
+          {% include footer-menu.html %}
+        </div>
+      </div>
+    </div>
+  </footer>
   
-{% include javascriptheme.html %}
 </div>
   
 </body>
