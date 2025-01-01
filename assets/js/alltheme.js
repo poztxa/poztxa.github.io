@@ -85,14 +85,7 @@ function fixedSidebarIfy() {
     });
 }
 
-
-
-$(document).ready(function() {
-  $("#main-wrapper, #sidebar-wrapper").theiaStickySidebar({
-    containerSelector: "#content-wrapper > .container", 
-    additionalMarginTop: 20,
-    additionalMarginBottom: 20,
-    sidebarBehavior: "modern",
-    minWidth: 768, 
-  });
+// Menambahkan event untuk menutup menu ketika tombol close atau overlay diklik
+$(".hide-supermag-pro-mobile-menu, .overlay").on("click", function() {
+    $("body").removeClass("nav-active"); // Hapus kelas 'nav-active' untuk menutup menu
 });
