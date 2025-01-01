@@ -1,0 +1,9 @@
+<div class="widget LinkList">
+  <ul class="social-icons social social-bg">
+    {% for link in site.data.social-links.social %}
+    <li class="{{ link.name }}">
+      <a class="{{ link.name }} btn" href="{{ link.url }}" rel="noopener noreferrer" target="_blank" title="{{ link.name }}"></a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
