@@ -106,7 +106,15 @@
     <div class="primary-footer flex-center">
       <div class="container row-x1">
         <div class="supermag-pro-about-section section">
-          {% include footer-logo.html %}
+<div class="widget Image">
+<a class="footer-logo custom-image" href="{{ site.baseurl }}/">
+{% if site.logo %}<img alt="Supermags theme free" src="{{ site.baseurl }}/{{ site.logo }}">{% endif %}
+  </a>
+  <div class="footer-info">
+    <h3 class="title">About Us</h3>
+    <p class="image-caption excerpt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
+  </div>
+</div>
         </div>
         <div class="supermag-pro-social-section">
           {% include social-links.html %}
