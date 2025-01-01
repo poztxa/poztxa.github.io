@@ -49,3 +49,18 @@ $(document).ready(function() {
     $("body").toggleClass("nav-active");
   });
 });
+
+
+$(document).ready(function() {
+  // Show the search bar when the 'show-search' button is clicked
+  $(".show-search").on("click", function() {
+    $("body").addClass("search-active"); // Add a class to the body to indicate the search is active
+    $("#main-search-wrap").fadeIn(170).find("input").focus(); // Show the search form and focus on the input
+  });
+
+  // Hide the search bar when the 'hide-search' button is clicked
+  $(".hide-search").on("click", function() {
+    $("body").removeClass("search-active"); // Remove the 'search-active' class from the body
+    $("#main-search-wrap").fadeOut(170).find("input").val("").blur(); // Hide the search form, clear the input, and blur it
+  });
+});
