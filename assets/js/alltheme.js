@@ -20,24 +20,15 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  const menuItems = document.querySelectorAll('.has-sub > a');
+// Toggle untuk membuka dan menutup menu
+$(".mobile-menu-toggle, .hide-supermag-pro-mobile-menu, .overlay").on("click", function() {
+    $("body").toggleClass("nav-active");
+});
 
-  menuItems.forEach(function(item) {
-    item.addEventListener('click', function(event) {
-      event.preventDefault(); // Menghindari link untuk navigasi
-      const subMenu = item.nextElementSibling;
-      if (subMenu.style.display === 'none' || subMenu.style.display === '') {
-        subMenu.style.display = 'block';
-      } else {
-        subMenu.style.display = 'none';
-      }
-    });
-  });
-
-  // Menutup menu saat klik di luar menu
-  document.querySelector('.overlay').addEventListener('click', function() {
-    document.querySelector('.supermag-pro-mobile-menu').style.display = 'none';
-    document.querySelector('.overlay').style.display = 'none';
-  });
+// Menangani klik submenu
+$(".supermag-pro-mobile-menu .has-sub").append('<div class="submenu-toggle"/>');
+$(".supermag-pro-mobile-menu .mega-menu").find(".submenu-toggle").remove();
+$(".supermag-pro-mobile-menu ul li .submenu-toggle").on("click", function(e) {
+    $(this).parent().toggleClass("show").children(".m-sub").slideToggle(170);
+    e.preventDefault();
 });
