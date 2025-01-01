@@ -18,3 +18,14 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   });
+
+
+$(document).ready(function() {
+  $("#main-wrapper, #sidebar-wrapper").theiaStickySidebar({
+    containerSelector: "#content-wrapper > .container", 
+    additionalMarginTop: 20,
+    additionalMarginBottom: 20,
+    sidebarBehavior: "modern",
+    minWidth: 768, 
+  });
+});
