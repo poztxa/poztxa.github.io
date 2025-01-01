@@ -1,0 +1,36 @@
+<div id="slide-menu">
+<div class="slide-menu-header">
+<div class="mobile-search">
+<form action="https://supermag-templateify.blogspot.com/search" class="search-form" role="search">
+<input autocomplete="off" class="search-input" name="q" placeholder="Search" type="search" value="">
+<button class="search-action" type="submit" value=""></button>
+</form>
+</div>
+<div class="mobile-toggle-wrap">
+<a class="hide-supermag-pro-mobile-menu" href="javascript:;" role="button"></a>
+</div>
+</div>
+<div class="slide-menu-flex">
+<div class="supermag-pro-mobile-menu" id="supermag-pro-mobile-menu"><ul id="main-mobile-nav" role="menubar">
+{% for link in site.data.menus.topmenu %}
+{% if link.sublinks %}
+<li class="has-sub"><a href="#" role="menuitem" alt="{{ link.title }}">{{ link.title }}</a><ul class="sub-menu m-sub" style="display: none;">
+{% for sublink in link.sublinks %}
+{% if sublink.title == '---' %}
+<li><hr class="dropdown-divider"></li>
+{% else %}
+</ul></li>
+{% else %}
+<li><a role="menuitem" href="{% unless link.external %}{{ site.baseurl }}{% endunless %}{{ link.url }}" alt="{{ link.title }}">
+{{ link.title }}
+</a>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+
+
+</div>
+</div>
+<div class="overlay"></div>
