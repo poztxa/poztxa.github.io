@@ -87,5 +87,5 @@ function fixedSidebarIfy() {
 
 // Menambahkan event untuk menutup menu ketika tombol close atau overlay diklik
 $(".hide-supermag-pro-mobile-menu, .overlay").on("click", function() {
-    $("body").removeClass("nav-active"); // Hapus kelas 'nav-active' untuk menutup menu
+    $("body").removeClass("nav-active"); // Menghapus kelas 'nav-active' untuk menutup menu
 });
