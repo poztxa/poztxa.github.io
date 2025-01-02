@@ -37,7 +37,7 @@ The geothermal water is cloudy and saturated with minerals, silica and algae. If
 
 Depending on your budget there are different packages to choose from. Note that the conversion rates below are estimates, see this [link](https://www.bluelagoon.com/explore) for current pricing.
 
-![package rates](/assets/images/SpaPackageRates.jpg)
+
 
 ## 7 Important TIPS:
 
@@ -45,7 +45,7 @@ Depending on your budget there are different packages to choose from. Note that 
 
 The most important advice I can give to you is to **take care of your hair**. The minerals in the water will damage your hair and if you do not take the necessary precautions, your hair will come out looking like a bird's nest. My poor cousin ended up having to chop of inches of her hair just to get rid of the tangles. Use the conditioner provided by Blue Lagoon and massage it through your hair like your life depends on it, because it does. Personally, I tied up my hair into a bun and avoided dipping it into the water, but if you're feeling adventurous I recommend lathering your hair in conditioner multiple times before and after! Do not rinse it off, just keep it lathered onto your hair when you enter the lagoon!
 
-![silhouette](/assets/images/SummerSilhouette.jpg)
+
 
 ### 2. Pre-book your visit
 
@@ -55,10 +55,7 @@ Purchase your tickets in advance and schedule a time that works for you. As one 
 
 This is probably the only occasion where you bring your kids to the spa with you, but what the the heck! Children ages 2-13 years old don't have to pay an entrance fee! Sounds like the perfect field trip to me!
 
-###### Please put me back in the water.
-![cia sad](/assets/images/CiaSad.jpg)
-###### Thanks
-![cia happy](/assets/images/LuciaFloatingPic.jpg)
+
 
 
 ### 4. Water Proof Your Electronic Devices
@@ -69,7 +66,7 @@ I've heard the horror stories of people losing their phones on their trip to the
 
 The location of Blue Lagoon is ideal as your first/last destination en route to and from the airport. I enjoyed making it my last stop, as I was fully relaxed in time for my flight!
 
-![map](/assets/images/BlueLagoonMap.jpg)
+
 ### 6. Use the Lockers to store your things
 
 Your electronic wristbands are very important as you will use it to purchase things as well as open your locker. The locker rooms are where you will store all of your things including your shoes, clothes, toiletries, electronics, etc. You'll want to bring slippers and a towel/robe with you which you can leaves on hooks provided by the lagoon! It will be pretty cold as you hop out of the lagoon, so exit close to your towel!
@@ -85,28 +82,15 @@ Locker rooms are separated by gender and yes, you will have to shower butt naked
 - Take a lot of pictures.
 - Relax.
 
-![i1](/assets/images/summerlagoon.jpg)
-
-![i2](/assets/images/dreandjvlagoon.jpg)
-
-![i3](/assets/images/drelagoon.jpg)
-
-![i4](/assets/images/FacialMask1.png)
-
-![i4](/assets/images/summerbeer.jpg)
 ### **9. Secret Photo Spot aka. BEST Viewing Deck**
 
 Not a lot of people know about this spot. If you want the best view of the lagoon head towards the restaurant and go upstairs to the second floor.
 
-![secretview](/assets/images/secretviewingdeck.png)
 
 ### Additional Info:
 
 The Lava Restaurant serves food and there is a cafe located by the entrance. I didn't get to try the food, but it looked tasty! Blue Lagoon Skin care products are also available for purchase at their store.
 
-![sign](/assets/images/bluelagoonsign.png)
-
-![dreamy](/assets/images/bluelagoondreamy.png)
 
 ## Conclusion:
 
@@ -116,5 +100,3 @@ Please let me know if you have any questions or are planning a trip here! Commen
 # Always, Walk in Love.
 
 # Summer
-
-Follow me on [Instagram](http://www.instagram.com/summerislive_), [Facebook](http://www.facebook.com/summerislive), and [Youtube](https://www.youtube.com/channel/UCCSyKD6MYASExRqTrOj5gRw?view_as=subscriber)
