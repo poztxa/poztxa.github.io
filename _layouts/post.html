@@ -52,16 +52,7 @@ post_class: post-template
                 {% endif %}
                 </small>
             </p>
-            
-			
-            
-<!-- Prev/Next -->
-<div class="post-nav">
-{% if page.previous.url %}<a class="post-nav-newer-link" href="{{page.previous.url | absolute_url}}" id="Blog1_post-nav-newer-link">Previous Post</a>{% endif %}
-{% if page.next.url %}<a class="post-nav-older-link" href="{{page.next.url | absolute_url}}" id="Blog1_post-nav-older-link">Next Post</a>{% endif %}
-</div><!-- End Prev/Next -->
-            
-            
+         
 <footer class="post-footer">
 <!-- Author Box -->
 {% if page.author %}
@@ -77,20 +68,12 @@ post_class: post-template
 {% endif %}
 <!-- End Author Box -->
 </footer>
-
-
-            
-            <!-- Begin Comments
-            ================================================== -->
-            <section>
-            <div id="comments">                          
-                {% include disqus.html %} 
-            </div>
-            </section>
-            <!--End Comments
-            ================================================== -->
-            
-            
+<!-- Prev/Next -->
+<div class="post-nav">
+{% if page.previous.url %}<a class="post-nav-newer-link" href="{{page.previous.url | absolute_url}}" id="Blog1_post-nav-newer-link">Previous Post</a>{% endif %}
+{% if page.next.url %}<a class="post-nav-older-link" href="{{page.next.url | absolute_url}}" id="Blog1_post-nav-older-link">Next Post</a>{% endif %}
+</div><!-- End Prev/Next -->
+	
 </main>
 <!-- End Post -->
 <!-- Sidebar -->
