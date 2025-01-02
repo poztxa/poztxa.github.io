@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Visit the Siargao Coconut Tree Rope Swing"
 author: Summer
-categories: [ Travel ]
+categories: [ Popular, Travel ]
 image: assets/images/kidsplaygroundsiargaocover.png
 ---
 On the island of never-ending coconut trees stands one coconut tree that leans further than rest. The famous Leaning Coconut Tree (how original!) also known as the Siargao Local's Playground. Built by the locals and slowly becoming a popular tourist destination, this rope swing is an experience you won't want to miss.
