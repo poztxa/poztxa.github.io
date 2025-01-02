@@ -12,29 +12,8 @@ post_class: post-template
 <!-- Post -->        
 {% assign author = site.authors[page.author] %}
 <main id='main-wrapper'>
-            <!-- Post Featured Image -->
-			{% if page.image %}<img class="featured-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">{% endif %}
-			<!-- End Featured Image -->
-			<div class="mainheading">             
-                
-                <!-- Post Categories -->
-                <div class="after-post-tags">
-                    <ul class="tags">
-                        {% assign sortedCategories = page.categories | sort %}
-                        {% for category in sortedCategories %}
-                        <li>
-                         <a href="{{ site.baseurl }}/categories#{{ category | slugify }}">{{ category }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <!-- End Categories -->
-                
-                <!-- Post Title -->
-<h1 class="posttitle">{{ page.title }}</h1> 
-                
-			</div>
 
+<h1 class="entry-title">{{ page.title }}</h1>
 <div class="entry-meta">
 <div class="align-left">
 <span class="entry-author"><span class="author-avatar-wrap"><span class="author-avatar lazy-ify" data-image="//blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhPbUza1dyJMHVwkHOx_Rgwy4ftkCpCYq3hpVDhDfJvBsey1OTk12Cq2RDE3n5_VzGRjCC08mdNVbvnjKszNifbn9aDkL3dv9r24OeAfWcB1aQ9P-Ipe8pKCmlvp75NJQ/w72-h72-p-k-no-nu/author-profile.jpg" style="background-image:url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhPbUza1dyJMHVwkHOx_Rgwy4ftkCpCYq3hpVDhDfJvBsey1OTk12Cq2RDE3n5_VzGRjCC08mdNVbvnjKszNifbn9aDkL3dv9r24OeAfWcB1aQ9P-Ipe8pKCmlvp75NJQ/w29-h29-p-k-no-nu/author-profile.jpg)"></span></span>
@@ -79,7 +58,7 @@ post_class: post-template
         <div class="related-item post item-{{ forloop.index0 }}">
           <a title="{{ post.title }}" class="entry-image-wrap is-image" href="{{ site.baseurl }}{{ post.url }}">
             {% if post.image %}
-            <span class="entry-thumb lazy-ify" data-image="{{ post.image }}" style="background-image:url({{ post.image }})"></span>
+            <span class="entry-thumb lazy-ify" data-image="{{ site.baseurl }}/{{ page.image }}" style="background-image:url({{ site.baseurl }}/{{ page.image }})"></span>
             {% endif %}
           </a>
           <div class="entry-header">
