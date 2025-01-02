@@ -19,6 +19,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+function fixedSidebarIfy() {
+    // Untuk setiap elemen dengan ID #main-wrapper dan #sidebar-wrapper
+    $("#main-wrapper, #sidebar-wrapper").each(function() {
+        // Jika fixedSidebar bernilai true
+        if (1 == fixedSidebar) {
+            // Terapkan plugin Theia Sticky Sidebar pada elemen tersebut
+            $(this).theiaStickySidebar({
+                containerSelector: "#content-wrapper > .container", // Selektor kontainer
+                additionalMarginTop: 20, // Margin tambahan di atas
+                additionalMarginBottom: 20 // Margin tambahan di bawah
+            });
+        }
+    });
+}
 
 $(document).ready(function() {
   // Menambahkan tombol toggle untuk submenu
