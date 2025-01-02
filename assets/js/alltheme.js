@@ -74,27 +74,16 @@ $(document).ready(function() {
 
 
 
-// Tentukan nilai untuk fixedSidebar
-var fixedSidebar = 1; // 1 untuk mengaktifkan sidebar sticky, 0 untuk menonaktifkan
-
-// Fungsi untuk menerapkan Theia Sticky Sidebar
 function fixedSidebarIfy() {
-    // Untuk setiap elemen dengan ID #main-wrapper dan #sidebar-wrapper
+    console.log("Applying Theia Sticky Sidebar");  // Cek apakah fungsi dipanggil
     $("#main-wrapper, #sidebar-wrapper").each(function() {
-        // Jika fixedSidebar bernilai true (1)
         if (1 == fixedSidebar) {
-            // Terapkan plugin Theia Sticky Sidebar pada elemen tersebut
+            console.log("Applying to:", this);  // Cek elemen yang diterapkan
             $(this).theiaStickySidebar({
-                containerSelector: "#content-wrapper > .container", // Selektor kontainer
-                additionalMarginTop: 20, // Margin tambahan di atas
-                additionalMarginBottom: 20 // Margin tambahan di bawah
+                containerSelector: "#content-wrapper > .container", 
+                additionalMarginTop: 20, 
+                additionalMarginBottom: 20 
             });
         }
     });
 }
-
-// Pastikan untuk memanggil fungsi ini setelah halaman sepenuhnya dimuat
-$(document).ready(function() {
-    console.log('Script is loaded');
-    fixedSidebarIfy();  // Panggil fungsi fixedSidebarIfy() setelah halaman dimuat
-});
