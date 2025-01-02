@@ -9,12 +9,9 @@ post_class: post-template
 ================================================== -->
 
 <div class="flex-center" id="content-wrapper" style="transform: none;"><div class="container row-x1" style="transform: none;">
-		
-
-		<!-- Post -->        
-        {% assign author = site.authors[page.author] %}
-        
-		<div class="col-sm-8">
+<!-- Post -->        
+{% assign author = site.authors[page.author] %}
+<main id='main-wrapper'>
             <!-- Post Featured Image -->
 			{% if page.image %}<img class="featured-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">{% endif %}
 			<!-- End Featured Image -->
@@ -100,12 +97,8 @@ post_class: post-template
             
             
 
-		</div>
-		<!-- End Post -->
-
-
-        
-
+</main>
+<!-- End Post -->
 <!-- Sidebar -->
 <aside id="sidebar-wrapper">
    <div class="sidebar supermag-pro-widget-ready section" id="sidebar" name="Sidebar">
