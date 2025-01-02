@@ -17,8 +17,9 @@ post_class: post-template
 <h1 class="entry-title">{{ page.title }}</h1>
 <div class="entry-meta">
 <div class="align-left">
-<span class="entry-author"><span class="author-avatar-wrap"><span class="author-avatar lazy-ify" data-image="//blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhPbUza1dyJMHVwkHOx_Rgwy4ftkCpCYq3hpVDhDfJvBsey1OTk12Cq2RDE3n5_VzGRjCC08mdNVbvnjKszNifbn9aDkL3dv9r24OeAfWcB1aQ9P-Ipe8pKCmlvp75NJQ/w72-h72-p-k-no-nu/author-profile.jpg" style="background-image:url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhPbUza1dyJMHVwkHOx_Rgwy4ftkCpCYq3hpVDhDfJvBsey1OTk12Cq2RDE3n5_VzGRjCC08mdNVbvnjKszNifbn9aDkL3dv9r24OeAfWcB1aQ9P-Ipe8pKCmlvp75NJQ/w29-h29-p-k-no-nu/author-profile.jpg)"></span></span>
-<span class="by">by</span><span class="author-name">Jonny Richards</span></span>
+{% if page.author %}
+<span class="entry-author"><span class="author-avatar-wrap"><span class="author-avatar lazy-ify" data-image="{{site.baseurl}}/{{author.avatar}}" style="background-image:url({{site.baseurl}}/{{author.avatar}})"></span></span>
+<span class="by">by</span><span class="author-name">{{ author.display_name }}</span></span>{% endif %}
 <span class="entry-time"><span class="on">-</span><time class="published" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time></span>
 {% if page.last_modified_at %}
 (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{ page.last_modified_at | date: "%b %-d, %Y" }}</time>)
