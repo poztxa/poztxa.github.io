@@ -6,7 +6,7 @@ background: '/img/bg-index.jpg'
 
 <!-- Home Intro
 ================================================== -->
-{% include /ads/header-ads-wrap.html %}
+{% include ads/header-ads-wrap.html %}
 <div class="flex-center" id="featured-wrapper"> <div class="featured container row-x1 section" id="featured" name="Featured Posts"> <div class="widget PopularPosts" data-version="2" id="PopularPosts1"> 
 <div class="widget-content"> <div class="featured-items"> <div class="featured-left"> 
 {% for post in site.posts limit:1 %} <div class="featured-item item-{{ forloop.index0 }}"> 
