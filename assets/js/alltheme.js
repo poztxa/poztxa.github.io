@@ -72,18 +72,15 @@ $(document).ready(function() {
 
 
 
-
-
-function fixedSidebarIfy() {
-    console.log("Applying Theia Sticky Sidebar");  // Cek apakah fungsi dipanggil
-    $("#main-wrapper, #sidebar-wrapper").each(function() {
-        if (1 == fixedSidebar) {
-            console.log("Applying to:", this);  // Cek elemen yang diterapkan
-            $(this).theiaStickySidebar({
-                containerSelector: "#content-wrapper > .container", 
-                additionalMarginTop: 20, 
-                additionalMarginBottom: 20 
-            });
-        }
-    });
-}
+  console.log("Applying Theia Sticky Sidebar");  // Cek apakah fungsi dipanggil
+  var fixedSidebar = 1;  // Variabel fixedSidebar untuk mengaktifkan sticky sidebar
+  $("#main-wrapper, #sidebar-wrapper").each(function() {
+      if (1 == fixedSidebar) {
+          console.log("Applying to:", this);  // Cek elemen yang diterapkan
+          $(this).theiaStickySidebar({
+              containerSelector: "#content-wrapper > .container", 
+              additionalMarginTop: 20, 
+              additionalMarginBottom: 20 
+          });
+      }
+  });
