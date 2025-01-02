@@ -19,20 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-function fixedSidebarIfy() {
-    // Untuk setiap elemen dengan ID #main-wrapper dan #sidebar-wrapper
-    $("#main-wrapper, #sidebar-wrapper").each(function() {
-        // Jika fixedSidebar bernilai true
-        if (1 == fixedSidebar) {
-            // Terapkan plugin Theia Sticky Sidebar pada elemen tersebut
-            $(this).theiaStickySidebar({
-                containerSelector: "#content-wrapper > .container", // Selektor kontainer
-                additionalMarginTop: 20, // Margin tambahan di atas
-                additionalMarginBottom: 20 // Margin tambahan di bawah
-            });
-        }
-    });
-}
 
 $(document).ready(function() {
   // Menambahkan tombol toggle untuk submenu
@@ -77,4 +63,38 @@ $(document).ready(function() {
     $("body").removeClass("search-active"); // Remove the 'search-active' class from the body
     $("#main-search-wrap").fadeOut(170).find("input").val("").blur(); // Hide the search form, clear the input, and blur it
   });
+});
+
+
+
+
+
+
+
+
+
+
+// Tentukan nilai untuk fixedSidebar
+var fixedSidebar = 1; // 1 untuk mengaktifkan sidebar sticky, 0 untuk menonaktifkan
+
+// Fungsi untuk menerapkan Theia Sticky Sidebar
+function fixedSidebarIfy() {
+    // Untuk setiap elemen dengan ID #main-wrapper dan #sidebar-wrapper
+    $("#main-wrapper, #sidebar-wrapper").each(function() {
+        // Jika fixedSidebar bernilai true (1)
+        if (1 == fixedSidebar) {
+            // Terapkan plugin Theia Sticky Sidebar pada elemen tersebut
+            $(this).theiaStickySidebar({
+                containerSelector: "#content-wrapper > .container", // Selektor kontainer
+                additionalMarginTop: 20, // Margin tambahan di atas
+                additionalMarginBottom: 20 // Margin tambahan di bawah
+            });
+        }
+    });
+}
+
+// Pastikan untuk memanggil fungsi ini setelah halaman sepenuhnya dimuat
+$(document).ready(function() {
+    console.log('Script is loaded');
+    fixedSidebarIfy();  // Panggil fungsi fixedSidebarIfy() setelah halaman dimuat
 });
