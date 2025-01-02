@@ -143,18 +143,20 @@
 
   <script>
 $(document).ready(function() {
-    // Pastikan variabel fixedSidebar sudah didefinisikan
-    var fixedSidebar = 1;  // Setel menjadi 1 untuk mengaktifkan sticky sidebar
-
-    // Terapkan sticky sidebar pada elemen yang sesuai jika fixedSidebar == 1
+    var fixedSidebar = 1;  // Mengaktifkan sticky sidebar
     if (fixedSidebar == 1) {
+        console.log("Applying Sticky Sidebar to:", $("#main-wrapper, #sidebar-wrapper"));
+        
         $("#main-wrapper, #sidebar-wrapper").each(function() {
+            console.log("Applying sticky to:", this);  // Debugging
             $(this).theiaStickySidebar({
-                containerSelector: "#content-wrapper > .container", 
-                additionalMarginTop: 20, 
-                additionalMarginBottom: 20 
+                containerSelector: "#content-wrapper > .container",  // Pastikan selector benar
+                additionalMarginTop: 20,
+                additionalMarginBottom: 20
             });
         });
+    } else {
+        console.log("Sticky Sidebar is disabled");
     }
 });
 </script>
