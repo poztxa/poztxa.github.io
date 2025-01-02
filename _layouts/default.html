@@ -140,6 +140,21 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js' type='text/javascript'/>
 <script src="{{ site.url }}{{ site.baseurl }}/assets/js/theme.js"></script>  
 <script src="{{ site.url }}{{ site.baseurl }}/assets/js/alltheme.js"></script>  
+
+  <script>
+  console.log("Applying Theia Sticky Sidebar");  // Cek apakah fungsi dipanggil
+  var fixedSidebar = 1;  // Variabel fixedSidebar untuk mengaktifkan sticky sidebar
+  $("#main-wrapper, #sidebar-wrapper").each(function() {
+      if (1 == fixedSidebar) {
+          console.log("Applying to:", this);  // Cek elemen yang diterapkan
+          $(this).theiaStickySidebar({
+              containerSelector: "#content-wrapper > .container", 
+              additionalMarginTop: 20, 
+              additionalMarginBottom: 20 
+          });
+      }
+  });
+</script>
   
 </body>
 {% include analytics.html %}
