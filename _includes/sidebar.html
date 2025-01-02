@@ -1,12 +1,22 @@
-<div class="sidebar sticky-top">        
-    <div class="sidebar-section">
-        <h5><span>Newsletter</span></h5>
-        {% include newsletter.html %}
-    </div>
-    <div class="sidebar-section">
-        <h5><span>Listen Now</span></h5>
-        <img src="{{site.baseurl}}/assets/images/ad.png">
-<br></br>
-        <iframe src="https://open.spotify.com/embed/track/5mORD275Z0zrFWGfwy2dHR" width="100%" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-    </div>
+<div class="widget PopularPosts" data-version="2" id="PopularPosts3">
+  <div class="widget-title title-wrap">
+    <h3 class="title">Popular Posts</h3>
+  </div>
+  <div class="widget-content sidebar-posts">
+    {% for post in site.posts %}
+      {% if post.categories contains "Popular" %}
+        <div class="popular-post post big-post item-{{ forloop.index0 }}">
+          <a class="entry-image-wrap is-image" href="{{ post.url }}" title="{{ post.title }}">
+            <span class="entry-thumb" style="background-image: url('{{ post.featured_image }}')"></span>
+          </a>
+          <div class="entry-header">
+            <span class="entry-category">{{ post.categories | join: ', ' }}</span>
+            <h2 class="entry-title">
+              <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+            </h2>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
