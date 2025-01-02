@@ -2,7 +2,7 @@
 layout: post
 title:  "Top 5 Game Changers at GDC"
 author: Summer
-categories: [ Gaming ]
+categories: [ Popular, Gaming ]
 image: assets/images/SummeratGDC.png
 ---
 My first time at Game Developer's Conference was EPIC. So epic that I am making it my mission to be a full-time gamer. In the meantime, check out my list of the Top 5 Game Changers:
