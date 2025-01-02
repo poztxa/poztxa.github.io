@@ -71,18 +71,18 @@ post_class: post-template
             <!-- End Prev/Next -->
             
             
-             <!-- Author Box -->
-                {% if page.author %}				
-				<div class="row post-top-meta">
-					<div class="col-md-2">
-						<img class="author-thumb" src="{{site.baseurl}}/{{author.avatar}}" alt="{{ author.display_name }}">
-					</div>
-					<div class="col-md-10">
-						<a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
-						<span class="author-description">{{ author.description }}</span>						
-					</div>
-				</div>				
-                {% endif %}
+<footer class="post-footer">
+{% if page.author %}
+<div class="about-author">
+<div class="avatar-container">
+<span class="author-avatar lazy-ify" data-image="{{site.baseurl}}/{{author.avatar}}" style="background-image:url({{site.baseurl}}/{{author.avatar}})"></span>
+</div>
+<div class="author-description">
+<span class="author-title"><a alt="{{ author.display_name }}" href="{{ author.web }}" rel="noopener noreferrer" target="_blank">{{ author.display_name }}</a></span>
+<p class="author-text excerpt">{{ author.description }}</p>
+<ul class="author-links social social-color"><li class="facebook"><a href="https://facebook.com/templateify" title="facebook" rel="noopener noreferrer" target="_blank"></a></li><li class="twitter"><a href="https://twitter.com/templateify" title="twitter" rel="noopener noreferrer" target="_blank"></a></li><li class="instagram"><a href="https://www.instagram.com/templateifydotcom/" title="instagram" rel="noopener noreferrer" target="_blank"></a></li><li class="youtube"><a href="https://www.youtube.com/channel/UClJz6zSWfSpXIfhexg_CUzA?sub_confirmation=1" title="youtube" rel="noopener noreferrer" target="_blank"></a></li><li class="external-link"><a href="https://www.templateify.com/" title="external-link" rel="noopener noreferrer" target="_blank"></a></li></ul></div>
+</div>
+</footer>
             
             
             <!-- Begin Comments
@@ -96,7 +96,6 @@ post_class: post-template
             ================================================== -->
             
             
-
 </main>
 <!-- End Post -->
 <!-- Sidebar -->
