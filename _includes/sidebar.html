@@ -7,7 +7,9 @@
   {% for post in site.posts limit:1 %}
     <div class="popular-post post big-post item-0">
       <a class="entry-image-wrap is-image" href="{{ post.url }}" title="{{ post.title }}">
-        <span class="entry-thumb" style="background-image: url('{{ post.featured_image | default: 'path/to/default-image.jpg' }}')"></span>
+                    {% if post.image %}
+            <span class="entry-thumb lazy-ify" data-image="{{ site.baseurl }}/{{ post.image }}" style="background-image:url({{ site.baseurl }}/{{ post.image }})"></span>
+            {% endif %}
       </a>
       <div class="entry-header">
         <span class="entry-category">{{ post.categories | join: ', ' }}</span>
@@ -22,7 +24,9 @@
   {% for post in site.posts limit:3 offset:1 %}
     <div class="popular-post post item-{{ forloop.index }}">
       <a class="entry-image-wrap is-image" href="{{ post.url }}" title="{{ post.title }}">
-        <span class="entry-thumb" style="background-image: url('{{ post.featured_image | default: 'path/to/default-image.jpg' }}')"></span>
+                    {% if post.image %}
+            <span class="entry-thumb lazy-ify" data-image="{{ site.baseurl }}/{{ post.image }}" style="background-image:url({{ site.baseurl }}/{{ post.image }})"></span>
+            {% endif %}
       </a>
       <div class="entry-header">
         <span class="entry-category">{{ post.categories | join: ', ' }}</span>
