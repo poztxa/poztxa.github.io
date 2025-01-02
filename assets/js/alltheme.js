@@ -67,11 +67,4 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-$(document).ready(function() {
-    $("#main-wrapper, #sidebar-wrapper").each(function(){1==fixedSidebar&&$(this).theiaStickySidebar({containerSelector:"#content-wrapper > .container",additionalMarginTop:20,additionalMarginBottom:20})})
-    });
  
