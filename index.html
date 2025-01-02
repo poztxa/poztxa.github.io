@@ -54,7 +54,7 @@ background: '/img/bg-index.jpg'
           </div>
         </div>
       </div> <!-- End of .trending -->
-
+{% include ads/home-ads.html %}
       <div class="blog-posts hfeed index-post-wrap">
         {% for post in paginator.posts %}
           {% if post.featured != true %}
