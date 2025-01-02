@@ -58,7 +58,7 @@ post_class: post-template
         <div class="related-item post item-{{ forloop.index0 }}">
           <a title="{{ post.title }}" class="entry-image-wrap is-image" href="{{ site.baseurl }}{{ post.url }}">
             {% if post.image %}
-            <span class="entry-thumb lazy-ify" data-image="{{ site.baseurl }}/{{ page.image }}" style="background-image:url({{ site.baseurl }}/{{ page.image }})"></span>
+            <span class="entry-thumb lazy-ify" data-image="{{ site.baseurl }}/{{ post.image }}" style="background-image:url({{ site.baseurl }}/{{ post.image }})"></span>
             {% endif %}
           </a>
           <div class="entry-header">
