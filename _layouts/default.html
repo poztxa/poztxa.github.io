@@ -102,39 +102,37 @@
       {{ content }}  
 <!-- Footer
 ================================================== -->    
-  <footer id="footer-wrapper">
-    <div class="primary-footer flex-center">
-      <div class="container row-x1">
-        <div class="supermag-pro-about-section section">
-<div class="widget Image">
-<a class="footer-logo custom-image" href="{{ site.baseurl }}/">
-{% if site.logo %}<img alt="Supermags theme free" src="{{ site.baseurl }}/{{ site.logo }}">{% endif %}
-  </a>
-  <div class="footer-info">
-    <h3 class="title">About Us</h3>
-    <p class="image-caption excerpt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
-  </div>
+<footer id="footer-wrapper"><div class="primary-footer flex-center"><div class="container row-x1"><div class="supermag-pro-about-section section" id="supermag-pro-about-section" name="About Section"><div class="widget Image" data-version="2" id="Image100">
+<a class="footer-logo custom-image" href="{{ site.baseurl }}/">{% if site.logo %}<img alt="Supermags theme free" id="Image100_img" src="{{ site.baseurl }}/{{ site.logo }}">{% endif %}</a>
+<div class="footer-info">
+<h3 class="title">About Us</h3>
+<p class="image-caption excerpt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
 </div>
-        </div>
-        <div class="supermag-pro-social-section">
-          {% include social-links.html %}
-        </div>
-      </div>
-    </div>
-
-    <div class="footerbar flex-center">
-      <div class="container row-x1">
-        <div class="footer-copyright section">
-          <div class="widget Text">
-            by - <a href="{{ site.baseurl }}" rel="noopener noreferrer" target="_blank">{{site.title}}</a>
-          </div>
-        </div>
-        <div class="footer-menu section">
-          {% include footer-menu.html %}
-        </div>
-      </div>
-    </div>
-  </footer>
+</div><div class="widget LinkList" data-version="2" id="LinkList103">
+<ul class="social-icons social social-bg">
+{% for link in site.data.social-links.social %}
+<li class="{{ link.name }}"><a class="{{ link.name }} btn" href="{{ link.url }}" rel="noopener noreferrer" target="_blank" title="{{ link.name }}"></a></li>
+{% endfor %}
+</ul>
+</div></div>
+</div>
+</div>
+<div class="footerbar flex-center">
+<div class="container row-x1">
+<div class="footer-copyright section" id="footer-copyright" name="Footer Copyright"><div class="widget Text" data-version="2" id="Text101">
+ by - <a href="{{ site.baseurl }}" rel="noopener noreferrer" target="_blank">{{site.title}}</a>
+</div></div>
+<div class="footer-menu section" id="footer-menu" name="Footer Menu"><div class="widget LinkList" data-version="2" id="LinkList104">
+<ul class="link-list list-style">
+<li><a href="/">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Contact Us</a></li>
+<li><a href="#">RTL Version</a></li>
+</ul>
+</div></div>
+</div>
+</div>
+</footer>
 </div>
 
 {% include menu-mobile.html %}
