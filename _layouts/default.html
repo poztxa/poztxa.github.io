@@ -111,7 +111,7 @@
 </div><div class="widget LinkList" data-version="2" id="LinkList103">
 <ul class="social-icons social social-bg">
 {% for link in site.data.social-links.social %}
-<li class="{{ link.name }}"><a class="{{ link.name }} btn" href="{{ link.url }}" rel="noopener noreferrer" target="_blank" title="{{ link.name }}"></a></li>
+<li class="{{ link.name }} link-{{ forloop.index0 }}"><a class="{{ link.name }} btn" href="{{ link.url }}" rel="noopener noreferrer" target="_blank" title="{{ link.name }}"></a></li>
 {% endfor %}
 </ul>
 </div></div>
