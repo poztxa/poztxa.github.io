@@ -27,7 +27,10 @@ title: Search
 
   // Simulasi data hasil pencarian
   const posts = {{ site.posts | jsonify }};
-  const results = posts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()) || post.content.toLowerCase().includes(query.toLowerCase()));
+  const results = posts.filter(post => 
+    post.title.toLowerCase().includes(query.toLowerCase()) || 
+    post.content.toLowerCase().includes(query.toLowerCase())
+  );
 
   displayResults(results);
 </script>
