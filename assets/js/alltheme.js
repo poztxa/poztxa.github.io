@@ -68,41 +68,39 @@ $(document).ready(function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  const fixedMenu = 1; // Menentukan apakah menu seharusnya tetap dipasang (gunakan 1 atau 0)
-  
+  const fixedMenu = 1; // Menentukan apakah menu harus tetap dipasang
   const headerInner = document.querySelector(".header-inner");
-  
+
   if (fixedMenu === 1 && headerInner) {
-    const initialOffset = window.pageYOffset;
-    const headerOffset = headerInner.offsetTop;
-    const headerHeight = headerInner.offsetHeight;
-    const scrollPosition = headerOffset + headerHeight + headerHeight;
-    
+    let initialScroll = window.pageYOffset; // Posisi awal scroll
+    const headerOffset = headerInner.offsetTop; // Posisi vertikal elemen header
+    const headerHeight = headerInner.offsetHeight; // Tinggi elemen header
+    const scrollTrigger = headerOffset + headerHeight; // Batas scroll untuk menambah kelas is-fixed
+
+    // Event listener untuk scroll
     window.addEventListener("scroll", function() {
-      const currentScroll = window.pageYOffset;
-      
-      // Jika scroll lebih dari posisi yang ditentukan, tambahkan kelas "is-fixed"
-      if (currentScroll > scrollPosition) {
+      const currentScroll = window.pageYOffset; // Posisi scroll saat ini
+
+      // Cek jika posisi scroll sudah melewati scrollTrigger
+      if (currentScroll > scrollTrigger) {
         headerInner.classList.add("is-fixed");
-      } else if (currentScroll < headerOffset || currentScroll <= 0) {
+      } else {
         headerInner.classList.remove("is-fixed");
       }
-      
-      // Menambahkan atau menghapus kelas "show" berdasarkan posisi scroll
-      if (currentScroll > initialOffset) {
-        headerInner.classList.remove("show");
-      } else {
+
+      // Menambahkan kelas "show" saat scroll naik
+      if (currentScroll < initialScroll) {
         headerInner.classList.add("show");
+      } else {
+        headerInner.classList.remove("show");
       }
-      
-      // Update posisi awal untuk perbandingan selanjutnya
-      initialOffset = currentScroll;
+
+      // Update posisi scroll terakhir
+      initialScroll = currentScroll;
     });
   }
-  
-  // Fungsi fixedSidebarIfy jika diperlukan (jika ada fungsi lain yang terkait)
-  fixedSidebarIfy();
 });
+
 
 
 !function(o){
