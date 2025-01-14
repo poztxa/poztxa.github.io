@@ -104,42 +104,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-$("#supermag-pro-load-more-link").on("click", function() {
-  var loadMoreUrl = $(this).attr('href');
-  
-  // Menyembunyikan tombol dan menampilkan loader
-  $(this).hide();
-  $("#blog-pager .loading").show();
+$(document).ready(function() {
+  // Ketika tombol "Load More" diklik
+  $('#load-more-button').on('click', function() {
+    var nextPageUrl = $(this).data('next-page');
+    
+    // Menyembunyikan tombol "Load More" dan menampilkan loader
+    $(this).hide();
+    $('.loading').show();
 
-  // Lakukan request AJAX untuk memuat lebih banyak postingan
-  $.ajax({
-    url: loadMoreUrl,
-    success: function(response) {
-      var newPosts = $(response).find(".blog-posts .index-post");
+    // Meminta data halaman berikutnya menggunakan AJAX
+    $.ajax({
+      url: nextPageUrl,
+      success: function(data) {
+        // Menemukan postingan baru dari halaman berikutnya
+        var newPosts = $(data).find('.blog-posts .post');
+        
+        // Menambahkan postingan baru ke halaman
+        $('.blog-posts').append(newPosts);
 
-      // Menambahkan postingan yang baru ke halaman
-      $(".blog-posts").append(newPosts);
-      
-      // Cek apakah ada halaman berikutnya
-      var nextPageUrl = $(response).find("#supermag-pro-load-more-link").attr('href');
-      if (nextPageUrl) {
-        // Jika ada, tampilkan tombol "Load More"
-        $("#supermag-pro-load-more-link").show();
-      } else {
-        // Jika tidak ada, tampilkan pesan "No More Posts"
-        $("#blog-pager .no-more").addClass("show");
+        // Cek jika masih ada halaman berikutnya
+        var nextPage = $(data).find('#load-more-button').data('next-page');
+        if (nextPage) {
+          $('#load-more-button').data('next-page', nextPage).show();  // Tampilkan tombol jika ada halaman berikutnya
+        } else {
+          $('#load-more-button').hide();  // Sembunyikan tombol jika tidak ada halaman berikutnya
+        }
+
+        // Sembunyikan loader setelah konten baru dimuat
+        $('.loading').hide();
+      },
+      error: function() {
+        alert('Error loading more posts.');
+        $('.loading').hide();
       }
-    },
-    beforeSend: function() {
-      // Menampilkan loader saat request sedang berlangsung
-      $("#blog-pager .loading").show();
-    },
-    complete: function() {
-      // Menyembunyikan loader setelah request selesai
-      $("#blog-pager .loading").hide();
-    }
+    });
   });
 });
+
 
 
 
