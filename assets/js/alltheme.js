@@ -66,6 +66,45 @@ $(document).ready(function() {
 });
 
 
+
+document.addEventListener("DOMContentLoaded", function() {
+  const fixedMenu = 1; // Menentukan apakah menu seharusnya tetap dipasang (gunakan 1 atau 0)
+  
+  const headerInner = document.querySelector(".header-inner");
+  
+  if (fixedMenu === 1 && headerInner) {
+    const initialOffset = window.pageYOffset;
+    const headerOffset = headerInner.offsetTop;
+    const headerHeight = headerInner.offsetHeight;
+    const scrollPosition = headerOffset + headerHeight + headerHeight;
+    
+    window.addEventListener("scroll", function() {
+      const currentScroll = window.pageYOffset;
+      
+      // Jika scroll lebih dari posisi yang ditentukan, tambahkan kelas "is-fixed"
+      if (currentScroll > scrollPosition) {
+        headerInner.classList.add("is-fixed");
+      } else if (currentScroll < headerOffset || currentScroll <= 0) {
+        headerInner.classList.remove("is-fixed");
+      }
+      
+      // Menambahkan atau menghapus kelas "show" berdasarkan posisi scroll
+      if (currentScroll > initialOffset) {
+        headerInner.classList.remove("show");
+      } else {
+        headerInner.classList.add("show");
+      }
+      
+      // Update posisi awal untuk perbandingan selanjutnya
+      initialOffset = currentScroll;
+    });
+  }
+  
+  // Fungsi fixedSidebarIfy jika diperlukan (jika ada fungsi lain yang terkait)
+  fixedSidebarIfy();
+});
+
+
 !function(o){
     o.fn.lazyify=function(){
         return this.each(function(){
