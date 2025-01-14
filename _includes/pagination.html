@@ -1,17 +1,15 @@
-<div class="blog-posts">
-  {% for post in paginator.posts %}
-    <div class="post">
-      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      <p>{{ post.excerpt }}</p>
-      <a href="{{ post.url }}" class="read-more">Read More</a>
-    </div>
-  {% endfor %}
+<div class="blog-pager" id="blog-pager">
+  {% if paginator.next_page %}
+    <a class="blog-pager-older-link btn load-more" href="?page={{ paginator.next_page }}" id="supermag-pro-load-more-link">
+      {{ "Load more posts" | translate }}
+    </a>
+    <span class="loading"><div class="loader"></div></span>
+    <span class="no-more btn load-more" style="display: none;">
+      {{ "No more posts" | translate }}
+    </span>
+  {% else %}
+    <span class="no-more btn load-more show">
+      {{ "No more posts" | translate }}
+    </span>
+  {% endif %}
 </div>
-
-<!-- Tombol "Load More" -->
-{% if paginator.next_page %}
-  <div class="load-more-container">
-    <button id="load-more-button" data-next-page="{{ paginator.next_page_path }}" class="load-more-btn">Load More</button>
-    <span class="loading" style="display: none;"><div class="loader"></div></span>
-  </div>
-{% endif %}
