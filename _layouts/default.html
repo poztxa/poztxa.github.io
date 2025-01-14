@@ -139,6 +139,23 @@
   
 <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>  
 <script src="{{ site.baseurl }}/assets/js/alltheme.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/theia-sticky-sidebar/1.7.0/Sidebar.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    function fixedSidebarIfy() {
+      $("#main-wrapper, #sidebar-wrapper").each(function() {
+        $(this).theiaStickySidebar({
+          containerSelector: "#content-wrapper > .container",
+          additionalMarginTop: 20,
+          additionalMarginBottom: 20
+        });
+      });
+    }
+
+    fixedSidebarIfy(); // Panggil fungsi saat dokumen siap
+  });
+</script>
   
 </body>
 {% include analytics.html %}
