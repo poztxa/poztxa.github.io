@@ -144,15 +144,19 @@
 
   <script>
 $(document).ready(function() {
+  console.log('Document is ready!');
   $(".header-inner").each(function() {
     var e = $(this);
-    if(1 == fixedMenu && e.length > 0) {
+    console.log('Header inner element found:', e);
+    if (1 == fixedMenu && e.length > 0) {
       var t = $(document).scrollTop(),
           a = e.offset().top,
           s = e.height(),
           r = a + s + s;
+      console.log('Scroll position:', t, 'Header offset:', a);
       $(window).scroll(function() {
         var s = $(document).scrollTop();
+        console.log('Scroll event triggered:', s);
         if (s > r) {
           e.addClass("is-fixed");
         } else if (s < a || s <= 0) {
