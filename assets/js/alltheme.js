@@ -138,6 +138,31 @@ $(document).ready(function() {
 
 
 
+  $(document).ready(function() {
+    // Menambahkan event listener untuk elemen dengan kelas .window-ify
+    $(".supermag-pro-share-links .window-ify").on("click", function() {
+      var e = $(this), // Menyimpan referensi ke elemen yang diklik
+          t = e.data("url"), // Mengambil URL dari data-url
+          a = e.data("width"), // Mengambil lebar dari data-width
+          s = e.data("height"), // Mengambil tinggi dari data-height
+          r = window.screen.width, // Lebar layar
+          o = window.screen.height, // Tinggi layar
+          i = Math.round(r / 2 - a / 2), // Menghitung posisi horizontal untuk jendela baru
+          n = Math.round(o / 2 - s / 2); // Menghitung posisi vertikal untuk jendela baru
+
+      // Membuka jendela baru dengan URL dan ukuran yang ditentukan
+      window.open(t, "_blank", "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=" + a + ",height=" + s + ",left=" + i + ",top=" + n).focus();
+    });
+
+    // Menambahkan event listener untuk tombol "Show More"
+    $(".supermag-pro-share-links").each(function() {
+      var e = $(this);
+      e.find(".show-hid a").on("click", function() {
+        e.toggleClass("show-hidden"); // Menampilkan atau menyembunyikan elemen berbagi sosial tambahan
+      });
+    });
+  });
+
 
 
 
