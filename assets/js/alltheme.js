@@ -105,49 +105,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 $(document).ready(function() {
-  $("#supermag-pro-load-more-link").on("click", function(event) {
-    event.preventDefault();
+  $("#supermag-pro-load-more-link").on("click", function(e) {
+    e.preventDefault();
+    var loadMoreUrl = $(this).attr("href");
     
-    var nextPageUrl = $(this).attr("href");
-    
-    // Sembunyikan tombol dan tampilkan loading spinner
-    $("#supermag-pro-load-more-link").hide();
-    $("#blog-pager .loading").show();
-    
-    // Lakukan permintaan AJAX untuk memuat lebih banyak konten
+    $(this).hide();
     $.ajax({
-      url: nextPageUrl,
-      success: function(response) {
-        // Ambil konten postingan baru dari halaman berikutnya
-        var newPosts = $(response).find(".blog-posts .index-post");
+      url: loadMoreUrl,
+      success: function(data) {
+        var newPosts = $(data).find(".blog-posts");
+        newPosts.find(".index-post").addClass("post-animated post-fadeInUp");
+        $(".blog-posts").append(newPosts.html());
         
-        // Tambahkan postingan baru ke halaman
-        $(".blog-posts").append(newPosts);
-        
-        // Cek apakah masih ada halaman berikutnya
-        var nextPageLink = $(response).find("#supermag-pro-load-more-link");
-        if (nextPageLink.length > 0) {
-          // Update URL untuk tombol "Load more"
-          $("#supermag-pro-load-more-link").attr("href", nextPageLink.attr("href"));
-          $("#supermag-pro-load-more-link").show();
+        var nextPageLink = $(data).find("#supermag-pro-load-more-link");
+        if (nextPageLink.length) {
+          $("#supermag-pro-load-more-link").attr("href", nextPageLink.attr("href")).show();
         } else {
-          // Jika tidak ada halaman berikutnya, sembunyikan tombol
+          $("#supermag-pro-load-more-link").hide();
           $("#blog-pager .no-more").addClass("show");
         }
       },
       beforeSend: function() {
-        // Tampilkan loading spinner
         $("#blog-pager .loading").show();
       },
       complete: function() {
-        // Sembunyikan loading spinner setelah selesai
         $("#blog-pager .loading").hide();
       }
     });
   });
 });
-
-
 
 
 
