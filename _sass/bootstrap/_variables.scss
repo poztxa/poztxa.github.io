@@ -1,3 +1,140 @@
+// Variable definitions
+$main-color: #1087FF;
+
+// Theme Options
+$darkmode: 0px;
+$userdarkmode: 1px;
+$sidebar: 0px;
+$fixedmenu: 1px;
+$fixedsidebar: 1px;
+
+// Theme Widths
+$fullwidth: 0px;
+$row-width: 1053px;
+$sidebar-width: 300px;
+
+// Theme Fonts
+$main-font: 'Rubik', Arial, sans-serif;
+$title-font: 'Rubik', Arial, sans-serif;
+$meta-font: 'Rubik', Arial, sans-serif;
+$text-font: 'Rubik', Arial, sans-serif;
+
+// Background
+$body-background: #F6F8FA;
+$body-darkmode-bg: #34393F;
+$outer-bg: #FFFFFF;
+$background-cover: 0px;
+
+// Theme Colors
+$title-color: #2F353B;
+$title-hover-color: $main-color;
+$meta-color: #8995A0;
+$tag-color: $main-color;
+$text-color: #65656A;
+$excerpt-color: #8995A0;
+
+// Topbar
+$topbar-bg: $main-color;
+$topbar-color: #FFFFFF;
+$topbar-hover-color: #E9F3FF;
+
+// Site Header
+$header-bg: #FFFFFF;
+$header-color: $title-color;
+$header-hover-color: $main-color;
+
+// Sub Menu
+$submenu-bg: #FFFFFF;
+$submenu-color: $title-color;
+$submenu-hover-color: $main-color;
+
+// Mega Menu
+$megamenu-bg: $submenu-bg;
+$megamenu-color: $submenu-color;
+$megamenu-hover-color: $main-color;
+
+// Mobile Menu
+$mmenu-bg: #FFFFFF;
+$mmenu-color: $title-color;
+$mmenu-hover-color: $main-color;
+
+// Header ADS
+$headerad-onpost: 1px;
+
+// Theme Widgets
+$wtitle-color: $title-color;
+
+// Post Styles
+$post-title-color: $title-color;
+$post-title-hover-color: $title-hover-color;
+
+// Post Page Styles
+$post-text-color: $text-color;
+$itempost-title-size: 35px;
+$itempost-content-size: 14px;
+
+// Post Page Options
+$breadcrumb: 1px;
+$cmm-count: 1px;
+$postnav: 1px;
+
+// Footer ADS
+$footerad-onpost: 1px;
+
+// Theme Footer
+$footer-bg: #242A30;
+$footer-color: #F6F7F8;
+$footer-text-color: #CFD6DA;
+$footer-hover-color: $main-color;
+
+// Footer Bar
+$footerbar-bg: #1C2327;
+$footerbar-color: #F6F7F8;
+$footerbar-hover-color: $main-color;
+
+// Cookie Consent
+$cookie-bg: #242A30;
+$cookie-color: #CFD6DA;
+
+// Theme Buttons
+$button-bg: $main-color;
+$button-color: #FFFFFF;
+$button-hover-bg: #3367D6;
+$button-hover-color: #FFFFFF;
+
+// Reset (Theme Fonts)
+// Site Font
+$mainfont-medium: normal 500 14px $main-font;
+$mainfont-semibold: normal 600 14px $main-font;
+$mainfont-bold: normal 700 14px $main-font;
+$mainfont-italic: italic 400 14px $main-font;
+$mainfont-mediumitalic: italic 500 14px $main-font;
+$mainfont-semibolditalic: italic 600 14px $main-font;
+$mainfont-bolditalic: italic 700 14px $main-font;
+
+// Title Font
+$titlefont-medium: normal 500 14px $title-font;
+$titlefont-semibold: normal 600 14px $title-font;
+$titlefont-bold: normal 700 14px $title-font;
+$titlefont-italic: italic 400 14px $title-font;
+$titlefont-mediumitalic: italic 500 14px $title-font;
+$titlefont-semibolditalic: italic 600 14px $title-font;
+$titlefont-bolditalic: italic 700 14px $title-font;
+
+// Meta Font
+$metafont-italic: italic 400 14px $meta-font;
+$metafont-medium: normal 500 14px $meta-font;
+$metafont-mediumitalic: italic 500 14px $meta-font;
+
+// Text Font
+$textfont-medium: normal 500 14px $text-font;
+$textfont-semibold: normal 600 14px $text-font;
+$textfont-bold: normal 700 14px $text-font;
+$textfont-italic: italic 400 14px $text-font;
+$textfont-mediumitalic: italic 500 14px $text-font;
+$textfont-semibolditalic: italic 600 14px $text-font;
+$textfont-bolditalic: italic 700 14px $text-font;
+
 /*-- Font Awesome Free 5.15.1 --*/
 @font-face {
   font-family: "Font Awesome 5 Brands";
