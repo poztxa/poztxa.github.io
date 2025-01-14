@@ -155,6 +155,27 @@ function fixedSidebarIfy(){
 }
 
 </script>
+
+  <script>
+  $(document).ready(function(){
+    $(".header-inner").each(function(){
+      var e = $(this);
+      if(1 == fixedMenu && e.length > 0){
+        var t = $(document).scrollTop(),
+            a = e.offset().top,
+            s = e.height(),
+            r = a + s + s;
+        $(window).scroll(function(){
+          var s = $(document).scrollTop();
+          s > r ? e.addClass("is-fixed") : (s < a || s <= 0) && e.removeClass("is-fixed");
+          s > t ? e.removeClass("show") : e.addClass("show");
+          t = s;
+        });
+      }
+    });
+    fixedSidebarIfy();
+  });
+</script>
   
 </body>
 {% include analytics.html %}
