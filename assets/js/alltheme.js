@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-
+function fixedSidebarIfy(){$("#main-wrapper, #sidebar-wrapper").each(function(){1==fixedSidebar&&$(this).theiaStickySidebar({containerSelector:"#content-wrapper > .container",additionalMarginTop:20,additionalMarginBottom:20})})}
 
 !function(o){
     o.fn.lazyify=function(){
