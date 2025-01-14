@@ -122,6 +122,15 @@ $(document).ready(function() {
         // Ambil konten postingan baru dari halaman berikutnya
         var newPosts = $(response).find(".blog-posts .index-post");
 
+        // Tambahkan ID dinamis (post-5, post-6, dst.)
+        newPosts.each(function(index) {
+          var newPost = $(this);
+          // Tentukan ID baru berdasarkan jumlah postingan yang sudah ada di halaman
+          var postId = "post-" + (index + $(".blog-posts .index-post").length);
+          // Setel ID untuk setiap postingan baru
+          newPost.attr("id", postId);
+        });
+
         // Tambahkan konten postingan baru ke halaman saat ini
         $(".blog-posts").append(newPosts);
 
