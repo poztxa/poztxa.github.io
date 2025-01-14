@@ -104,6 +104,42 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+$("#supermag-pro-load-more-link").on("click", function() {
+  var loadMoreUrl = $(this).attr('href');
+  
+  // Menyembunyikan tombol dan menampilkan loader
+  $(this).hide();
+  $("#blog-pager .loading").show();
+
+  // Lakukan request AJAX untuk memuat lebih banyak postingan
+  $.ajax({
+    url: loadMoreUrl,
+    success: function(response) {
+      var newPosts = $(response).find(".blog-posts .index-post");
+
+      // Menambahkan postingan yang baru ke halaman
+      $(".blog-posts").append(newPosts);
+      
+      // Cek apakah ada halaman berikutnya
+      var nextPageUrl = $(response).find("#supermag-pro-load-more-link").attr('href');
+      if (nextPageUrl) {
+        // Jika ada, tampilkan tombol "Load More"
+        $("#supermag-pro-load-more-link").show();
+      } else {
+        // Jika tidak ada, tampilkan pesan "No More Posts"
+        $("#blog-pager .no-more").addClass("show");
+      }
+    },
+    beforeSend: function() {
+      // Menampilkan loader saat request sedang berlangsung
+      $("#blog-pager .loading").show();
+    },
+    complete: function() {
+      // Menyembunyikan loader setelah request selesai
+      $("#blog-pager .loading").hide();
+    }
+  });
+});
 
 
 
