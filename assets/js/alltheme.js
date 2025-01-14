@@ -107,45 +107,47 @@ document.addEventListener("DOMContentLoaded", function() {
 $(document).ready(function() {
   $("#supermag-pro-load-more-link").on("click", function(event) {
     event.preventDefault();
-    
+
+    // Ambil URL halaman berikutnya
     var nextPageUrl = $(this).attr("href");
     
-    // Sembunyikan tombol dan tampilkan loading spinner
+    // Sembunyikan tombol dan tampilkan spinner loading
     $("#supermag-pro-load-more-link").hide();
     $("#blog-pager .loading").show();
     
-    // Lakukan permintaan AJAX untuk memuat lebih banyak konten
+    // Lakukan permintaan AJAX ke halaman berikutnya
     $.ajax({
       url: nextPageUrl,
       success: function(response) {
         // Ambil konten postingan baru dari halaman berikutnya
         var newPosts = $(response).find(".blog-posts .index-post");
-        
-        // Tambahkan postingan baru ke halaman
+
+        // Tambahkan konten postingan baru ke halaman saat ini
         $(".blog-posts").append(newPosts);
-        
+
         // Cek apakah masih ada halaman berikutnya
         var nextPageLink = $(response).find("#supermag-pro-load-more-link");
         if (nextPageLink.length > 0) {
-          // Update URL untuk tombol "Load more"
+          // Perbarui URL untuk tombol "Load more"
           $("#supermag-pro-load-more-link").attr("href", nextPageLink.attr("href"));
           $("#supermag-pro-load-more-link").show();
         } else {
-          // Jika tidak ada halaman berikutnya, sembunyikan tombol
+          // Jika tidak ada halaman berikutnya, sembunyikan tombol dan tampilkan pesan "No more posts"
           $("#blog-pager .no-more").addClass("show");
         }
       },
       beforeSend: function() {
-        // Tampilkan loading spinner
+        // Tampilkan loading spinner sebelum permintaan dimulai
         $("#blog-pager .loading").show();
       },
       complete: function() {
-        // Sembunyikan loading spinner setelah selesai
+        // Sembunyikan loading spinner setelah permintaan selesai
         $("#blog-pager .loading").hide();
       }
     });
   });
 });
+
 
 
 
