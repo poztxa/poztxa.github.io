@@ -2,8 +2,44 @@
 layout: page
 title: Search Results
 ---
-<!-- List where search results will be rendered -->
-<ul id="search-results"></ul>
+
+<div class="flex-center" id="content-wrapper">
+  <div class="container row-x1">
+    
+    <main id="main-wrapper">
+
+      <!-- Search Box -->
+      <div id="search-box">
+        <input type="text" id="search-input" placeholder="Search..." />
+        <button id="search-button">Search</button>
+      </div>
+
+      <div class="blog-posts hfeed index-post-wrap">
+        <ul id="search-results"></ul>
+      </div> <!-- End of .blog-posts -->
+      
+      <div class='blog-pager' id='blog-pager'>
+        {% if paginator.next_page %}
+          <a class='blog-pager-older-link btn load-more' href='/page{{ paginator.next_page }}' id='supermag-pro-load-more-link'>
+            Load More Posts
+          </a>
+          <span class='loading'><div class='loader'></div></span>
+          <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
+        {% else %}
+          <span class='no-more btn load-more show'>No More Posts</span>
+        {% endif %}
+      </div>
+      
+    </main>
+
+    <!-- Sidebar Wrapper -->
+    <aside id="sidebar-wrapper">
+      <div class="sidebar supermag-pro-widget-ready section" id="sidebar" name="Sidebar">
+        {% include sidebar.html %}
+      </div>
+    </aside>
+  </div>
+</div>
 
 <script>
   // Template to generate the JSON to search
@@ -19,9 +55,32 @@ title: Search Results
       {% unless forloop.last %},{% endunless %}
     {% endfor %}
   };
+
+  // Search functionality
+  document.getElementById('search-button').addEventListener('click', function() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    const results = Object.keys(window.store).filter(key => {
+      const post = window.store[key];
+      return post.title.toLowerCase().includes(query) || post.content.toLowerCase().includes(query);
+    });
+
+    const resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = ''; // Clear previous results
+
+    if (results.length > 0) {
+      results.forEach(result => {
+        const post = window.store[result];
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<a href="${post.url}">${post.title}</a> by ${post.author}`;
+        resultsContainer.appendChild(listItem);
+      });
+    } else {
+      resultsContainer.innerHTML = '<li>No results found</li>';
+    }
+  });
 </script>
 
 <!-- Import lunr.js from unpkg.com -->
 <script src="https://unpkg.com/lunr/lunr.js"></script>
 <!-- Custom search script which we will create below -->
-<script src="{{ site.baseurl }}/assets/js/search.js"></script>  
+<script src="{{ site.baseurl }}/assets/js/search.js"></script>
