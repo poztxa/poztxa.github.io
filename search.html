@@ -1,0 +1,33 @@
+---
+layout: default
+title: Search
+---
+
+<h1>Search Results for "{{ page.title }}"</h1>
+
+<div id="search-results"></div>
+
+<script>
+  const query = new URLSearchParams(window.location.search).get('q');
+  const resultsContainer = document.getElementById('search-results');
+
+  // Fungsi untuk menampilkan hasil pencarian
+  function displayResults(results) {
+    if (results.length === 0) {
+      resultsContainer.innerHTML = '<p>No results found.</p>';
+      return;
+    }
+
+    results.forEach(result => {
+      const resultItem = document.createElement('div');
+      resultItem.innerHTML = `<h2><a href="${result.url}">${result.title}</a></h2><p>${result.excerpt}</p>`;
+      resultsContainer.appendChild(resultItem);
+    });
+  }
+
+  // Simulasi data hasil pencarian
+  const posts = {{ site.posts | jsonify }};
+  const results = posts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()) || post.content.toLowerCase().includes(query.toLowerCase()));
+
+  displayResults(results);
+</script>
