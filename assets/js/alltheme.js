@@ -104,6 +104,64 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+$(document).ready(function() {
+  $("#supermag-pro-load-more-link").on("click", function(e) {
+    e.preventDefault();
+    var loadMoreUrl = $(this).attr("href");
+    
+    $(this).hide();
+    $.ajax({
+      url: loadMoreUrl,
+      success: function(data) {
+        var newPosts = $(data).find(".blog-posts");
+        newPosts.find(".index-post").addClass("post-animated post-fadeInUp");
+        $(".blog-posts").append(newPosts.html());
+        
+        var nextPageLink = $(data).find("#supermag-pro-load-more-link");
+        if (nextPageLink.length) {
+          $("#supermag-pro-load-more-link").attr("href", nextPageLink.attr("href")).show();
+        } else {
+          $("#supermag-pro-load-more-link").hide();
+          $("#blog-pager .no-more").addClass("show");
+        }
+      },
+      beforeSend: function() {
+        $("#blog-pager .loading").show();
+      },
+      complete: function() {
+        $("#blog-pager .loading").hide();
+      }
+    });
+  });
+});
+
+
+
+
+  $(document).ready(function() {
+    // Menambahkan event listener untuk elemen dengan kelas .window-ify
+    $(".supermag-pro-share-links .window-ify").on("click", function() {
+      var e = $(this), // Menyimpan referensi ke elemen yang diklik
+          t = e.data("url"), // Mengambil URL dari data-url
+          a = e.data("width"), // Mengambil lebar dari data-width
+          s = e.data("height"), // Mengambil tinggi dari data-height
+          r = window.screen.width, // Lebar layar
+          o = window.screen.height, // Tinggi layar
+          i = Math.round(r / 2 - a / 2), // Menghitung posisi horizontal untuk jendela baru
+          n = Math.round(o / 2 - s / 2); // Menghitung posisi vertikal untuk jendela baru
+
+      // Membuka jendela baru dengan URL dan ukuran yang ditentukan
+      window.open(t, "_blank", "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=" + a + ",height=" + s + ",left=" + i + ",top=" + n).focus();
+    });
+
+    // Menambahkan event listener untuk tombol "Show More"
+    $(".supermag-pro-share-links").each(function() {
+      var e = $(this);
+      e.find(".show-hid a").on("click", function() {
+        e.toggleClass("show-hidden"); // Menampilkan atau menyembunyikan elemen berbagi sosial tambahan
+      });
+    });
+  });
 
 
 
