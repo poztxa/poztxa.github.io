@@ -55,16 +55,15 @@ background: '/img/bg-index.jpg'
         </div>
       </div> <!-- End of .trending -->
 {% include ads/home-ads.html %}
-      {% for post in paginator.posts %}
-      <div class="blog-posts hfeed index-post-wrap">
       
+      <div class="blog-posts hfeed index-post-wrap">
+      {% for post in paginator.posts %}
           {% if post.featured != true %}
             {% include postbox.html %}
           {% endif %}
-        
+        {% endfor %}
       </div> <!-- End of .blog-posts -->
-      {% endfor %}
-{% include pagination.html %}
+      {% include pagination.html %}
     </main> <!-- End of #main-wrapper -->
 
     <aside id="sidebar-wrapper">
