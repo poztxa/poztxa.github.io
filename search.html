@@ -1,36 +1,27 @@
 ---
-layout: default
-title: Search
+layout: page
+title: Search Results
 ---
-
-<h1>Search Results for "{{ page.title }}"</h1>
-
-<div id="search-results"></div>
+<!-- List where search results will be rendered -->
+<ul id="search-results"></ul>
 
 <script>
-  const query = new URLSearchParams(window.location.search).get('q');
-  const resultsContainer = document.getElementById('search-results');
-
-  // Fungsi untuk menampilkan hasil pencarian
-  function displayResults(results) {
-    if (results.length === 0) {
-      resultsContainer.innerHTML = '<p>No results found.</p>';
-      return;
-    }
-
-    results.forEach(result => {
-      const resultItem = document.createElement('div');
-      resultItem.innerHTML = `<h2><a href="${result.url}">${result.title}</a></h2><p>${result.excerpt}</p>`;
-      resultsContainer.appendChild(resultItem);
-    });
-  }
-
-  // Simulasi data hasil pencarian
-  const posts = {{ site.posts | jsonify }};
-  const results = posts.filter(post => 
-    post.title.toLowerCase().includes(query.toLowerCase()) || 
-    post.content.toLowerCase().includes(query.toLowerCase())
-  );
-
-  displayResults(results);
+  // Template to generate the JSON to search
+  window.store = {
+    {% for post in site.posts %}
+      "{{ post.url | slugify }}": {
+        "title": "{{ post.title | xml_escape }}",
+        "author": "{{ post.author | xml_escape }}",
+        "category": "{{ post.category | xml_escape }}",
+        "content": {{ post.content | strip_html | strip_newlines | jsonify }},
+        "url": "{{ post.url | xml_escape }}"
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  };
 </script>
+
+<!-- Import lunr.js from unpkg.com -->
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<!-- Custom search script which we will create below -->
+<script src="/js/search.js"></script>
