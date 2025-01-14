@@ -33,7 +33,11 @@ post_class: post-template
 <div class="post-body entry-content" id="post-body">
 {{content}}
 </div></div>
-         
+	
+<div class='post-share'>
+{% include social-share.html %}
+</div>
+
 <footer class="post-footer">
 <!-- Author Box -->
 {% if page.author %}
