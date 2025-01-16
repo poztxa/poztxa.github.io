@@ -24,6 +24,9 @@ sass:
   style: :compressed
 ganalytics: G-S07GSKMHZF
 
+version_params:
+version_dir: "v1.0"
+  
 # Authors
 authors:
   Summer:
