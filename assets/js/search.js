@@ -66,44 +66,41 @@ excluded_in_search: true
 		if (results.length) {
 			var resultsHTML = "";
 			var searchVersions = [{% for v in site.version_params.search_versions %}"{{ v }}",{% endfor %}"all"]
-			results.forEach(function (result) {
-			
-  				var item = window.data[result.ref]
+results.forEach(function (result) {
+    var item = window.data[result.ref];
 
-				// Versioning is disabled
-				if (("{{ site.version_params.versioning }}" == "false") && (item.version != "all")) {
-				    return
-				}
+    if (("{{ site.version_params.versioning }}" == "false") && (item.version != "all")) {
+        return;
+    }
 
-				// Skip result if showing versions disabled
-				if (("{{ site.version_params.allow_search }}" == "false") && (item.version != "all")) {
-				    return
-				}
+    if (("{{ site.version_params.allow_search }}" == "false") && (item.version != "all")) {
+        return;
+    }
 
-                               // Skip result if version not in all or versions allowed for search
-				if (("{{ site.version_params.versioning }}" == "true") && ("{{ site.version_params.allow_search }}" == "true") && (!searchVersions.includes(item.version))) {
-				    return
-				}
+    if (("{{ site.version_params.versioning }}" == "true") && ("{{ site.version_params.allow_search }}" == "true") && (!searchVersions.includes(item.version))) {
+        return;
+    }
 
-                                if (item.title) {
-					contentPreview = getPreview(query, item.content, 170),
-					titlePreview = getPreview(query, item.title);
+    if (item.title) {
+        contentPreview = getPreview(query, item.content, 170);
+        titlePreview = getPreview(query, item.title);
 
-					// If we only allow one version (all) skip adding a badge
-					if (searchVersions.length == 1 ||  "{{ site.version_params.versioning }}" == "false"){
-						versionBadge = ""
+        if (searchVersions.length == 1 || "{{ site.version_params.versioning }}" == "false") {
+            versionBadge = "";
+        } else if (item.version != "all") {
+            versionBadge = "<span class='badge badge-secondary'>" + item.version + "</span>";
+        } else {
+            versionBadge = "<span class='badge badge-{{ site.tag_color }}'>Current</span>";
+        }
 
-					// Any older version shows up in gray
-					} else if (item.version != "all") {
-						versionBadge = "<span class='badge badge-secondary'>" + item.version + "</span>"
+        resultsHTML += "<li>" +
+            (item.image ? "<img src='" + item.image.trim() + "' alt='" + titlePreview + "' style='width: 100px; height: auto; margin-right: 10px;'>" : "") +
+            "<h4><a href='{{ site.baseurl }}" + item.url.trim() + "'>" + titlePreview + "</a></h4>" +
+            "<p>" + versionBadge + "<small>" + contentPreview + "</small></p>" +
+            "</li>";
+    }
+});
 
-					// Current is blue (primary)
-					} else {
-						versionBadge = "<span class='badge badge-{{ site.tag_color }}'>Current</span>"
-                                       }
-					resultsHTML += "<li><h4><a href='{{ site.baseurl }}" + item.url.trim() + "'>" + titlePreview + "</a></h4><p>" + versionBadge +"<small>" + contentPreview + "</small></p></li>";
-				}
-			});
 
 			searchResultsEl.innerHTML = resultsHTML;
 			searchProcessEl.innerText = "Showing";
