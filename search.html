@@ -5,24 +5,25 @@ title: "Pencarian"
 
 <h1>Halaman Pencarian</h1>
 <form action="/search/" method="get">
-    <input type="text" name="q" placeholder="Cari...">
+    <input type="text" name="q" placeholder="Cari..." value="{{ site.request.query_string | split: 'q=' | last | uri_decode }}">
     <input type="submit" value="Cari">
 </form>
 
-{% assign query = page.url | split: '?' | last %}
-{% assign query = query | split: '=' | last %}
-{% assign query = query | uri_decode %}
+{% assign query = site.request.query_string | split: 'q=' | last | uri_decode %}
 
 {% if query and query != "" %}
-    <h2>Hasil Pencarian untuk: {{ query }}</h2>
+    <h2>Hasil Pencarian untuk: "{{ query }}"</h2>
     <div class="search-results">
+        {% assign results_found = false %}
         {% for post in site.posts %}
-            {% if post.title contains query or post.content contains query %}
-                {% assign author = site.authors[post.author] %}
+            {% if post.title contains query or post.excerpt contains query or post.content contains query %}
+                {% assign author = site.authors[post.author] | default: site.author %}
                 <article class="blog-post hentry index-post post-{{ forloop.index0 }}">
                     <a class="entry-image-wrap is-image" href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">
                         {% if post.image %}
                             <span class="entry-thumb lazy-ify" data-image="{{ post.image }}" style="background-image:url({{ post.image }})"></span>
+                        {% else %}
+                            <span class="entry-thumb lazy-ify" data-image="/assets/default-image.jpg" style="background-image:url(/assets/default-image.jpg)"></span>
                         {% endif %}
                     </a>
                     <div class="entry-header">
@@ -34,17 +35,21 @@ title: "Pencarian"
                         <div class="entry-meta">
                             <span class="entry-author">
                                 <span class="by">by</span>
-                                <span class="author-name">{% if post.author %}{{ author.display_name }}{% else %}{{ site.author }}{% endif %}</span>
+                                <span class="author-name">{{ author.display_name | default: "Admin" }}</span>
                             </span>
                             <span class="entry-time">
                                 <span class="on">-</span>
-                                <time class="published" datetime="{{ post.date | date_to_string }}">{{ post.date | date_to_string }}</time>
+                                <time class="published" datetime="{{ post.date | date_to_string }}">{{ post.date | date: "%d %B %Y" }}</time>
                             </span>
                         </div>
                     </div>
                 </article>
+                {% assign results_found = true %}
             {% endif %}
         {% endfor %}
+        {% unless results_found %}
+            <p>Tidak ada hasil yang ditemukan untuk kata kunci "{{ query }}".</p>
+        {% endunless %}
     </div>
 {% else %}
     <p>Masukkan kata kunci untuk mencari.</p>
