@@ -1,65 +1,38 @@
 ---
-layout: page
-sitemap: false
+layout: default
+title: Search
 permalink: /search/
-not_editable: true
-excluded_in_search: true
 ---
-
-<div class="queryMessage">
-<span class="query-info query-success"><span id="search-query-container" style="display: none;">"<strong id="search-query"></strong>"</span></span>
+<div class="search-results">
+  <h1>Hasil Pencarian untuk "{{ page.query }}"</h1>
+  <div class="blog-posts hfeed index-post-wrap">
+    {% assign results = site.posts | where_exp: "post", "post.title contains page.query or post.excerpt contains page.query" %}
+    {% if results.size > 0 %}
+      {% for post in results %}
+        <article class="blog-post hentry index-post">
+          <a class="entry-image-wrap is-image" href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">
+            {% if post.image %}
+              <span class="entry-thumb lazy-ify" style="background-image:url({{ post.image }})"></span>
+            {% endif %}
+          </a>
+          <div class="entry-header">
+            <span class="entry-category">{{ post.categories[0] }}</span>
+            <h2 class="entry-title">
+              <a class="entry-title-link" href="{{ site.baseurl }}{{ post.url }}" rel="bookmark" title="{{ post.title }}">
+                {{ post.title }}
+              </a>
+            </h2>
+            <p class="entry-excerpt excerpt">{{ post.excerpt | strip_html | truncatewords:15 }}</p>
+            <div class="entry-meta">
+              <span class="entry-time">
+                <time class="published" datetime="{{ post.date | date_to_string }}">{{ post.date | date_to_string }}</time>
+              </span>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>Tidak ada hasil ditemukan untuk pencarian "{{ page.query }}".</p>
+    {% endif %}
+  </div>
 </div>
-<div class="blog-posts hfeed index-post-wrap" id="search-results"></div>
-
-{% capture version_prefix %}/_posts/{{ site.version_params.version_dir }}/{% endcapture %}
-<script>
-	window.data = {
-		{% for post in site.docs %}
-				{% unless post.excluded_in_search %}
-					{% if added %},{% endif %}
-					{% assign added = false %}{% assign version_dir = post.url | split: version_prefix %}{% assign docs_version = version_dir[1] | split: "/" %}
-					"{{ post.url | slugify }}": {
-						"id": "{{ post.url | slugify }}",
-						"title": "{{ post.title | xml_escape }}",
-						"version": "{% if post.url contains site.version_params.version_dir %}{{ docs_version[0] }}{% else %}all{% endif %}",
-						"categories": "{{ post.categories | join: ", " | xml_escape }}",
-						"url": " {{ post.url | xml_escape }}",
-						"content": {{ post.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
-					}
-					{% assign added = true %}
-				{% endunless %}
-		{% endfor %}
-		{% for post in site.posts %}
-				{% unless post.excluded_in_search %}
-					{% if added %},{% endif %}
-					{% assign added = false %}
-					"{{ post.url | slugify }}": {
-						"id": "{{ post.url | slugify }}",
-						"title": "{{ post.title | xml_escape }}",
-						"version": "all", 
-						"categories": "{{ post.categories | join: ", " | xml_escape }}",
-						"url": " {{ post.url | xml_escape }}",
-						"content": {{ post.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
-					}
-					{% assign added = true %}
-				{% endunless %}
-		{% endfor %}
-		{% for post in site.pages %}
-				{% unless post.excluded_in_search %}
-					{% if added %},{% endif %}
-					{% assign added = false %}
-					"{{ post.url | slugify }}": {
-						"id": "{{ post.url | slugify }}",
-						"title": "{{ post.title | xml_escape }}",
-						"version": "all",
-						"categories": "{{ post.categories | join: ", " | xml_escape }}",
-						"url": " {{ post.url | xml_escape }}",
-						"content": {{ post.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
-					}
-					{% assign added = true %}
-				{% endunless %}
-		{% endfor %}
-	};
-</script>
-<script src="{{ site.baseurl }}/assets/js/lunr.min.js"></script>
-<script src="{{ site.baseurl }}/assets/js/search.js"></script>
