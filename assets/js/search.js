@@ -1,61 +1,138 @@
-(function() {
-  function showResults(results, store) {
-    var searchResults = document.getElementById('search-results');
+---
+layout: null
+excluded_in_search: true
+---
+(function () {
+	function getQueryVariable(variable) {
+		var query = window.location.search.substring(1),
+			vars = query.split("&");
 
-    if (results.length) { // If there are results...
-      var appendString = '';
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
 
-      for (var i = 0; i < results.length; i++) {  // Iterate over them and generate html
-        var item = store[results[i].ref];
-        appendString += '<li><a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
-        appendString += '<p>' + item.content.substring(0, 250) + '...</p></li>';
-      }
+			if (pair[0] === variable) {
+				return decodeURIComponent(pair[1].replace(/\+/g, '%20')).trim();
+			}
+		}
+	}
 
-      searchResults.innerHTML = appendString;
-    } else {
-      searchResults.innerHTML = '<li>No results found</li>';
-    }
-  }
+	function getPreview(query, content, previewLength) {
+		previewLength = previewLength || (content.length * 2);
 
-  function getQuery(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split('&');
+		var parts = query.split(" "),
+			match = content.toLowerCase().indexOf(query.toLowerCase()),
+			matchLength = query.length,
+			preview;
 
-    for (var i = 0; i < vars.length; i++) {
-      var pair = vars[i].split('=');
+		// Find a relevant location in content
+		for (var i = 0; i < parts.length; i++) {
+			if (match >= 0) {
+				break;
+			}
 
-      if (pair[0] === variable) {
-        return decodeURIComponent(pair[1].replace(/\+/g, '%20'));
-      }
-    }
-  }
+			match = content.toLowerCase().indexOf(parts[i].toLowerCase());
+			matchLength = parts[i].length;
+		}
 
-  var searchTerm = getQuery('query');
+		// Create preview
+		if (match >= 0) {
+			var start = match - (previewLength / 2),
+				end = start > 0 ? match + matchLength + (previewLength / 2) : previewLength;
 
-  if (searchTerm) {
-    document.getElementById('search-box').setAttribute("value", searchTerm);
+			preview = content.substring(start, end).trim();
 
-    // Initalize lunr.js with the fields to search.
-    // The title field is given more weight with the "boost" parameter
-    var idx = lunr(function () {
-      this.field('id');
-      this.field('title', { boost: 10 });
-      this.field('author');
-      this.field('category');
-      this.field('content');
+			if (start > 0) {
+				preview = "..." + preview;
+			}
 
-      for (var key in window.store) { // Add the JSON we generated from the site content to Lunr.js.
-        this.add({
-          'id': key,
-          'title': window.store[key].title,
-          'author': window.store[key].author,
-          'category': window.store[key].category,
-          'content': window.store[key].content
-        });
-      }
-    });
+			if (end < content.length) {
+				preview = preview + "...";
+			}
 
-    var results = idx.search(searchTerm); // Perform search with Lunr.js
-    showResults(results, window.store);
-  }
+			// Highlight query parts
+			preview = preview.replace(new RegExp("(" + parts.join("|") + ")", "gi"), "<strong>$1</strong>");
+		} else {
+			// Use start of content if no match found
+			preview = content.substring(0, previewLength).trim() + (content.length > previewLength ? "..." : "");
+		}
+
+		return preview;
+	}
+
+	function displaySearchResults(results, query) {
+		var searchResultsEl = document.getElementById("search-results"),
+			searchProcessEl = document.getElementById("search-process");
+
+		if (results.length) {
+			var resultsHTML = "";
+			var searchVersions = [{% for v in site.version_params.search_versions %}"{{ v }}",{% endfor %}"all"]
+			results.forEach(function (result) {
+			
+  				var item = window.data[result.ref]
+
+				// Versioning is disabled
+				if (("{{ site.version_params.versioning }}" == "false") && (item.version != "all")) {
+				    return
+				}
+
+				// Skip result if showing versions disabled
+				if (("{{ site.version_params.allow_search }}" == "false") && (item.version != "all")) {
+				    return
+				}
+
+                               // Skip result if version not in all or versions allowed for search
+				if (("{{ site.version_params.versioning }}" == "true") && ("{{ site.version_params.allow_search }}" == "true") && (!searchVersions.includes(item.version))) {
+				    return
+				}
+
+                                if (item.title) {
+					contentPreview = getPreview(query, item.content, 170),
+					titlePreview = getPreview(query, item.title);
+
+					// If we only allow one version (all) skip adding a badge
+					if (searchVersions.length == 1 ||  "{{ site.version_params.versioning }}" == "false"){
+						versionBadge = ""
+
+					// Any older version shows up in gray
+					} else if (item.version != "all") {
+						versionBadge = "<span class='badge badge-secondary'>" + item.version + "</span>"
+
+					// Current is blue (primary)
+					} else {
+						versionBadge = "<span class='badge badge-{{ site.tag_color }}'>Current</span>"
+                                       }
+					resultsHTML += "<li><h4><a href='{{ site.baseurl }}" + item.url.trim() + "'>" + titlePreview + "</a></h4><p>" + versionBadge +"<small>" + contentPreview + "</small></p></li>";
+				}
+			});
+
+			searchResultsEl.innerHTML = resultsHTML;
+			searchProcessEl.innerText = "Showing";
+		} else {
+			searchResultsEl.style.display = "none";
+			searchProcessEl.innerText = "No";
+		}
+	}
+
+	window.index = lunr(function () {
+		this.field("id");
+		this.field("title", {boost: 10});
+		this.field("categories");
+		this.field("url");
+		this.field("content");
+	});
+
+	var query = decodeURIComponent((getQueryVariable("q") || "").replace(/\+/g, "%20")),
+		searchQueryContainerEl = document.getElementById("search-query-container"),
+		searchQueryEl = document.getElementById("search-query");
+
+	searchQueryEl.innerText = query;
+        if (query != ""){
+   		searchQueryContainerEl.style.display = "inline";
+        }
+
+	for (var key in window.data) {
+		window.index.add(window.data[key]);
+	}
+
+	displaySearchResults(window.index.search(query), query); // Hand the results off to be displayed
 })();
