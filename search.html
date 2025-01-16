@@ -9,10 +9,11 @@ title: "Pencarian"
     <input type="submit" value="Cari">
 </form>
 
-{% assign query = page.url | split: '?' | last | split: '=' | last %}
+{% assign query = page.url | split: '?' | last %}
+{% assign query = query | split: '=' | last %}
 {% assign query = query | uri_decode %}
 
-{% if query %}
+{% if query and query != "" %}
     <h2>Hasil Pencarian untuk: {{ query }}</h2>
     <ul>
         {% for post in site.posts %}
