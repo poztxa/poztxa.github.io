@@ -16,7 +16,7 @@ share: false
     {% for post in site.posts %}
     <div id="{{ post.id | replace: '/', '-' }}" >
 <div class="blog-posts hfeed index-post-wrap">
-{% include postbox.html %}
+{% includes search-post.html %}
 </div>
         <hr class="with-no-margin"/>
     </div>
