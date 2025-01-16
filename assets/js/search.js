@@ -106,7 +106,7 @@ excluded_in_search: true
 			});
 
 			searchResultsEl.innerHTML = resultsHTML;
-			searchProcessEl.innerText = "Showing";
+			searchProcessEl.innerText = "";
 		} else {
 			searchResultsEl.style.display = "none";
 			searchProcessEl.innerText = "No";
