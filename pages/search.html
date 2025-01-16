@@ -6,8 +6,10 @@ permalink: /search/
 not_editable: true
 excluded_in_search: true
 ---
-<p><span id="search-process">Loading</span> results <span id="search-query-container" style="display: none;">for "<strong id="search-query"></strong>"</span></p>
 
+<div class="queryMessage">
+<span class="query-info query-success"><span id="search-process">Loading</span><span id="search-query-container" style="display: none;">"<strong id="search-query"></strong>"</span></span>
+</div>
 <ul id="search-results"></ul>
 
 {% capture version_prefix %}/docs/{{ site.version_params.version_dir }}/{% endcapture %}
