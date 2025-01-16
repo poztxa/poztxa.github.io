@@ -1,86 +1,21 @@
 ---
-layout: page
-title: Search Results
+layout: default
+title: "Pencarian"
 ---
 
-<div class="flex-center" id="content-wrapper">
-  <div class="container row-x1">
-    
-    <main id="main-wrapper">
+<h1>Halaman Pencarian</h1>
+<form action="/search/" method="get">
+    <input type="text" name="q" placeholder="Cari...">
+    <input type="submit" value="Cari">
+</form>
 
-      <!-- Search Box -->
-      <div id="search-box">
-        <input type="text" id="search-input" placeholder="Search..." />
-        <button id="search-button">Search</button>
-      </div>
-
-      <div class="blog-posts hfeed index-post-wrap">
-        <ul id="search-results"></ul>
-      </div> <!-- End of .blog-posts -->
-      
-      <div class='blog-pager' id='blog-pager'>
-        {% if paginator.next_page %}
-          <a class='blog-pager-older-link btn load-more' href='/page{{ paginator.next_page }}' id='supermag-pro-load-more-link'>
-            Load More Posts
-          </a>
-          <span class='loading'><div class='loader'></div></span>
-          <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
-        {% else %}
-          <span class='no-more btn load-more show'>No More Posts</span>
-        {% endif %}
-      </div>
-      
-    </main>
-
-    <!-- Sidebar Wrapper -->
-    <aside id="sidebar-wrapper">
-      <div class="sidebar supermag-pro-widget-ready section" id="sidebar" name="Sidebar">
-        {% include sidebar.html %}
-      </div>
-    </aside>
-  </div>
-</div>
-
-<script>
-  // Template to generate the JSON to search
-  window.store = {
-    {% for post in site.posts %}
-      "{{ post.url | slugify }}": {
-        "title": "{{ post.title | xml_escape }}",
-        "author": "{{ post.author | xml_escape }}",
-        "category": "{{ post.category | xml_escape }}",
-        "content": {{ post.content | strip_html | strip_newlines | jsonify }},
-        "url": "{{ post.url | xml_escape }}"
-      }
-      {% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  };
-
-  // Search functionality
-  document.getElementById('search-button').addEventListener('click', function() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const results = Object.keys(window.store).filter(key => {
-      const post = window.store[key];
-      return post.title.toLowerCase().includes(query) || post.content.toLowerCase().includes(query);
-    });
-
-    const resultsContainer = document.getElementById('search-results');
-    resultsContainer.innerHTML = ''; // Clear previous results
-
-    if (results.length > 0) {
-      results.forEach(result => {
-        const post = window.store[result];
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `<a href="${post.url}">${post.title}</a> by ${post.author}`;
-        resultsContainer.appendChild(listItem);
-      });
-    } else {
-      resultsContainer.innerHTML = '<li>No results found</li>';
-    }
-  });
-</script>
-
-<!-- Import lunr.js from unpkg.com -->
-<script src="https://unpkg.com/lunr/lunr.js"></script>
-<!-- Custom search script which we will create below -->
-<script src="{{ site.baseurl }}/assets/js/search.js"></script>
+{% if page.query %}
+    <h2>Hasil Pencarian untuk: {{ page.query }}</h2>
+    <ul>
+        {% for post in site.posts %}
+            {% if post.title contains page.query or post.content contains page.query %}
+                <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
