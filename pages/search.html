@@ -12,7 +12,7 @@ excluded_in_search: true
 </div>
 <ul id="search-results"></ul>
 
-{% capture version_prefix %}/docs/{{ site.version_params.version_dir }}/{% endcapture %}
+{% capture version_prefix %}/_posts/{{ site.version_params.version_dir }}/{% endcapture %}
 <script>
 	window.data = {
 		{% for post in site.docs %}
