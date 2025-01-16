@@ -9,13 +9,18 @@ title: "Pencarian"
     <input type="submit" value="Cari">
 </form>
 
-{% if page.query %}
-    <h2>Hasil Pencarian untuk: {{ page.query }}</h2>
+{% assign query = page.url | split: '?' | last | split: '=' | last %}
+{% assign query = query | uri_decode %}
+
+{% if query %}
+    <h2>Hasil Pencarian untuk: {{ query }}</h2>
     <ul>
         {% for post in site.posts %}
-            {% if post.title contains page.query or post.content contains page.query %}
+            {% if post.title contains query or post.content contains query %}
                 <li><a href="{{ post.url }}">{{ post.title }}</a></li>
             {% endif %}
         {% endfor %}
     </ul>
+{% else %}
+    <p>Masukkan kata kunci untuk mencari.</p>
 {% endif %}
