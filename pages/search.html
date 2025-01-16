@@ -3,6 +3,11 @@ layout: default
 title: Search
 permalink: /search/
 ---
+
+<!-- Tangkap parameter kueri dari URL -->
+{% assign query = site.data | split: "?" | last | split: "=" | last %}
+{% assign page.query = query | url_decode %}
+
 <div class="search-results">
   <h1>Hasil Pencarian untuk "{{ page.query }}"</h1>
   <div class="blog-posts hfeed index-post-wrap">
