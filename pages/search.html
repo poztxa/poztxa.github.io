@@ -1,24 +1,32 @@
----
-layout: page
-title: Search Results
-permalink: /search/
-hide: true
-share: false
----
-
 <script>
-    var baseurl = "{{ site.baseurl }}";
+    async function fetchSearchResults() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get("q") || "";
+        const searchResults = document.getElementById("search-results");
+
+        if (query) {
+            const response = await fetch("{{ site.baseurl }}/search.json");
+            const posts = await response.json();
+
+            const filteredPosts = posts.filter(post => 
+                post.title.toLowerCase().includes(query.toLowerCase()) ||
+                post.content.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (filteredPosts.length > 0) {
+                searchResults.innerHTML = filteredPosts.map(post => `
+                    <article class="blog-post">
+                        <h2><a href="${post.url}">${post.title}</a></h2>
+                        <p>${post.content.substring(0, 150)}...</p>
+                    </article>
+                `).join("");
+            } else {
+                searchResults.innerHTML = "<p>Tidak ada hasil ditemukan.</p>";
+            }
+        } else {
+            searchResults.innerHTML = "<p>Masukkan kata kunci untuk mencari.</p>";
+        }
+    }
+
+    fetchSearchResults();
 </script>
-
-<div id="search-results">
-    <hr id="first-hr" class="with-no-margin"/>
-
-    {% for post in site.posts %}
-    <div id="{{ post.id | replace: '/', '-' }}" >
-        <div class="blog-posts hfeed index-post-wrap">
-            {% includes search-post.html %}
-        </div>
-        <hr class="with-no-margin"/>
-    </div>
-    {% endfor %}
-</div>
