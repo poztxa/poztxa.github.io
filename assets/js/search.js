@@ -92,7 +92,7 @@
 var outputResults = function(query, results, el) {
     var frag = document.createDocumentFragment();
 
-    // Create the new structure for the query message
+    // Create the query message
     var queryMessage = document.createElement("div");
     queryMessage.className = "queryMessage";
 
@@ -103,20 +103,100 @@ var outputResults = function(query, results, el) {
     queryMessage.appendChild(queryInfo);
     frag.appendChild(queryMessage);
 
-    results.forEach(function(result) {
-        var div = document.createElement("div");
-        div.className = "search-result";
+    // Create the blog-posts container
+    var blogPostsContainer = document.createElement("div");
+    blogPostsContainer.className = "blog-posts hfeed index-post-wrap";
 
-        var title = document.createElement("h2");
-        var link = document.createElement("a");
-        link.href = result.link;
-        link.appendChild(document.createTextNode(result.title));
-        title.appendChild(link);
+    results.forEach(function(result, index) {
+        // Create the article element
+        var article = document.createElement("article");
+        article.className = `blog-post hentry index-post post-${index}`;
 
-        div.appendChild(title);
-        frag.appendChild(div);
+        // Add the entry-image-wrap
+        var entryImageWrap = document.createElement("a");
+        entryImageWrap.className = "entry-image-wrap is-image";
+        entryImageWrap.href = result.link;
+        entryImageWrap.title = result.title;
+
+        var entryThumb = document.createElement("span");
+        entryThumb.className = "entry-thumb lazy-ify";
+        entryThumb.dataset.image = result.image || "assets/images/default.jpg"; // Default image fallback
+        entryThumb.style.backgroundImage = `url(${result.image || "assets/images/default.jpg"})`;
+
+        entryImageWrap.appendChild(entryThumb);
+        article.appendChild(entryImageWrap);
+
+        // Add the entry-header
+        var entryHeader = document.createElement("div");
+        entryHeader.className = "entry-header";
+
+        var entryCategory = document.createElement("span");
+        entryCategory.className = "entry-category";
+        entryCategory.textContent = result.category || "Uncategorized";
+
+        var entryTitle = document.createElement("h2");
+        entryTitle.className = "entry-title";
+
+        var titleLink = document.createElement("a");
+        titleLink.className = "entry-title-link";
+        titleLink.href = result.link;
+        titleLink.rel = "bookmark";
+        titleLink.title = result.title;
+        titleLink.textContent = result.title;
+
+        entryTitle.appendChild(titleLink);
+        entryHeader.appendChild(entryCategory);
+        entryHeader.appendChild(entryTitle);
+
+        // Add the entry-excerpt
+        var entryExcerpt = document.createElement("p");
+        entryExcerpt.className = "entry-excerpt excerpt";
+        entryExcerpt.textContent = result.excerpt || ""; // Optional excerpt
+
+        entryHeader.appendChild(entryExcerpt);
+
+        // Add the entry-meta
+        var entryMeta = document.createElement("div");
+        entryMeta.className = "entry-meta";
+
+        var entryAuthor = document.createElement("span");
+        entryAuthor.className = "entry-author";
+
+        var byText = document.createElement("span");
+        byText.className = "by";
+        byText.textContent = "by";
+
+        var authorName = document.createElement("span");
+        authorName.className = "author-name";
+        authorName.textContent = result.author || "Anonymous";
+
+        entryAuthor.appendChild(byText);
+        entryAuthor.appendChild(authorName);
+
+        var entryTime = document.createElement("span");
+        entryTime.className = "entry-time";
+
+        var onText = document.createElement("span");
+        onText.className = "on";
+        onText.textContent = "-";
+
+        var time = document.createElement("time");
+        time.className = "published";
+        time.dateTime = result.date || "";
+        time.textContent = result.date || "Unknown Date";
+
+        entryTime.appendChild(onText);
+        entryTime.appendChild(time);
+
+        entryMeta.appendChild(entryAuthor);
+        entryMeta.appendChild(entryTime);
+        entryHeader.appendChild(entryMeta);
+
+        article.appendChild(entryHeader);
+        blogPostsContainer.appendChild(article);
     });
 
+    frag.appendChild(blogPostsContainer);
     el.appendChild(frag);
 };
 
