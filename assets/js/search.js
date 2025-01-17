@@ -1,135 +1,172 @@
----
-layout: null
-excluded_in_search: true
----
-(function () {
-	function getQueryVariable(variable) {
-		var query = window.location.search.substring(1),
-			vars = query.split("&");
+!(function() {
 
-		for (var i = 0; i < vars.length; i++) {
-			var pair = vars[i].split("=");
-
-			if (pair[0] === variable) {
-				return decodeURIComponent(pair[1].replace(/\+/g, '%20')).trim();
-			}
-		}
-	}
-
-	function getPreview(query, content, previewLength) {
-		previewLength = previewLength || (content.length * 2);
-
-		var parts = query.split(" "),
-			match = content.toLowerCase().indexOf(query.toLowerCase()),
-			matchLength = query.length,
-			preview;
-
-		// Find a relevant location in content
-		for (var i = 0; i < parts.length; i++) {
-			if (match >= 0) {
-				break;
-			}
-
-			match = content.toLowerCase().indexOf(parts[i].toLowerCase());
-			matchLength = parts[i].length;
+	var parseQueryFromURL = function() {
+		
+		var searchQuery = window.location.search;
+		if (!searchQuery) {
+			return null;
 		}
 
-		// Create preview
-		if (match >= 0) {
-			var start = match - (previewLength / 2),
-				end = start > 0 ? match + matchLength + (previewLength / 2) : previewLength;
-
-			preview = content.substring(start, end).trim();
-
-			if (start > 0) {
-				preview = "..." + preview;
-			}
-
-			if (end < content.length) {
-				preview = preview + "...";
-			}
-
-			// Highlight query parts
-			preview = preview.replace(new RegExp("(" + parts.join("|") + ")", "gi"), "<strong>$1</strong>");
-		} else {
-			// Use start of content if no match found
-			preview = content.substring(0, previewLength).trim() + (content.length > previewLength ? "..." : "");
+		var regex = /[?&]([^=#]+)=([^&#]*)/g,
+			params = {},
+			match;
+		while (match = regex.exec(searchQuery)) {
+			params[match[1]] = match[2];
 		}
 
-		return preview;
-	}
-
-	function displaySearchResults(results, query) {
-		var searchResultsEl = document.getElementById("search-results"),
-			searchProcessEl = document.getElementById("search-process");
-
-		if (results.length) {
-			var resultsHTML = "";
-			var searchVersions = [{% for v in site.version_params.search_versions %}"{{ v }}",{% endfor %}"all"]
-results.forEach(function (result) {
-    var item = window.data[result.ref];
-
-    if (("{{ site.version_params.versioning }}" == "false") && (item.version != "all")) {
-        return;
-    }
-
-    if (("{{ site.version_params.allow_search }}" == "false") && (item.version != "all")) {
-        return;
-    }
-
-    if (("{{ site.version_params.versioning }}" == "true") && ("{{ site.version_params.allow_search }}" == "true") && (!searchVersions.includes(item.version))) {
-        return;
-    }
-
-    if (item.title) {
-        contentPreview = getPreview(query, item.content, 170);
-        titlePreview = getPreview(query, item.title);
-
-        if (searchVersions.length == 1 || "{{ site.version_params.versioning }}" == "false") {
-            versionBadge = "";
-        } else if (item.version != "all") {
-            versionBadge = "<span class='badge badge-secondary'>" + item.version + "</span>";
-        } else {
-            versionBadge = "<span class='badge badge-{{ site.tag_color }}'>Current</span>";
-        }
-
-        resultsHTML += "<li>" +
-            (item.image ? "<img src='" + item.image.trim() + "' alt='" + titlePreview + "' style='width: 100px; height: auto; margin-right: 10px;'>" : "") +
-            "<h4><a href='{{ site.baseurl }}" + item.url.trim() + "'>" + titlePreview + "</a></h4>" +
-            "<p>" + versionBadge + "<small>" + contentPreview + "</small></p>" +
-            "</li>";
-    }
-});
-
-
-			searchResultsEl.innerHTML = resultsHTML;
-			searchProcessEl.innerText = "Showing";
-		} else {
-			searchResultsEl.style.display = "none";
-			searchProcessEl.innerText = "No";
+		if (!params.hasOwnProperty("query")) {
+			return null;
 		}
-	}
 
-	window.index = lunr(function () {
-		this.field("id");
-		this.field("title", {boost: 10});
-		this.field("categories");
-		this.field("url");
-		this.field("content");
-	});
+		params.query = params.query.replace(/\+/g, ' ');
 
-	var query = decodeURIComponent((getQueryVariable("q") || "").replace(/\+/g, "%20")),
-		searchQueryContainerEl = document.getElementById("search-query-container"),
-		searchQueryEl = document.getElementById("search-query");
+		return decodeURIComponent(params.query);
 
-	searchQueryEl.innerText = query;
-        if (query != ""){
-   		searchQueryContainerEl.style.display = "inline";
-        }
+	};
+	
 
-	for (var key in window.data) {
-		window.index.add(window.data[key]);
-	}
+	var scanPosts = function(posts, properties, query) {
 
-	displaySearchResults(window.index.search(query), query); // Hand the results off to be displayed
+		var results = [],
+		// used to store the count and ordinal of matching posts by their link
+		matches = {},
+		// used when we iterate over the matches
+		match,
+		// split the query up into multiple search terms
+		terms = query.split(" ");
+		// each search term needs its own regular expression
+		regexes = terms.map(function(term) {
+			return new RegExp(term, "ig");
+		});
+
+		// add the original query in so that exact matches get 
+		// an extra count and so rise to the top
+		regexes.push(new RegExp(query, "ig"));
+
+		posts.forEach(function(post, ordinal) {
+			var textToScan = "",
+				regex = new RegExp(query, "ig");
+				
+			properties.forEach(function(property) {
+				if (post.hasOwnProperty(property)) {
+					textToScan += post[property];
+				}
+			});
+
+			// for the post check it against all the regexes
+			regexes.forEach(function(regex) {
+				if (regex.test(textToScan)) {
+					if (matches[post.link]) {
+						// already matched increment the count
+						matches[post.link].count++;
+					} else {
+						// new match, add a match
+						matches[post.link] = {
+							count: 1,
+							ordinal: ordinal,
+						};
+					}
+				}
+			});
+		});
+
+		// add all the matches into the results array
+		for (match in matches) {
+			if (matches.hasOwnProperty(match)) {
+				results.push(matches[match]);
+			}
+		}
+
+		// sort all the matches by their count and ordinal
+		results.sort(function (l, r) {
+			if (l.count > r.count) {
+				return -1;
+			}
+			if (l.count < r.count) {
+				return 1;
+			}
+			if (l.ordinal > r.ordinal) {
+				return 1;
+			}
+			if (l.ordinal < r.ordinal) {
+				return -1;
+			}
+			return 0;
+		});
+
+		// convert the results from matches to posts
+		results = results.map(function(match){
+			return posts[match.ordinal];
+		});
+
+		return results;
+
+	};
+
+	var outputResults = function(query, results, el) {
+
+		var frag = document.createDocumentFragment();
+		var pageTitle = document.createElement("h1");
+		pageTitle.appendChild(document.createTextNode("Search results for \"" + query + "\""));
+		frag.appendChild(pageTitle);
+		results.forEach(function(result) {
+
+			var div = document.createElement("div");
+			div.className = "search-result";
+
+			var title = document.createElement("h2");
+			var link = document.createElement("a");
+			link.href = result.link;
+			link.appendChild(document.createTextNode(result.title));
+			title.appendChild(link);
+
+			div.appendChild(title);
+
+			frag.appendChild(div);
+
+		});
+
+		el.appendChild(frag);
+
+	};
+
+	var Search = function(options) {
+
+		options = options || {};
+		
+		if (!options.selector) {
+			throw new Error("We need a selector to find");
+		}
+
+		this.el = document.querySelector(options.selector);
+		if (!this.el) {
+			throw new Error("We need a HTML element to output to");
+		}
+
+		this.posts = JEKYLL_POSTS;
+		if (!this.posts) {
+			return this.el.appendChild(document.createTextNode(this.noResultsMessage));
+		}
+
+
+		var defaultProperties = ["title"];
+		this.properties = options.properties || defaultProperties;
+
+		this.query = parseQueryFromURL();
+		
+		if (!this.query) {
+			return this.el.appendChild(document.createTextNode("No search terms specified."));
+		}
+
+		this.results = scanPosts(this.posts, this.properties, this.query);
+		
+		if (!this.results.length) {
+			return this.el.appendChild(document.createTextNode("No results found for \"" + this.query + "\""));
+		}
+
+		outputResults(this.query, this.results, this.el);
+
+	};
+
+	window.jekyllSearch = Search;
 })();
