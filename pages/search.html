@@ -30,17 +30,11 @@ permalink: /search/
 
 <script src="{{ "/assets/js/search.js" | prepend: site.baseurl }}"></script>
 <script>
-    new jekyllSearch({
-        selector: "#results",
-        properties: ["title", "content"],
-        onResults: function(results) {
-            var resultsElement = document.querySelector("#results");
-            resultsElement.innerHTML = ""; 
-            outputResults(query, results, resultsElement); 
-        }
-    });
+	new jekyllSearch({
+		selector: "#results",
+		properties: ["title", "content"]
+	});
 </script>
-
 
 </div></div></main>
 <!-- End Post -->
