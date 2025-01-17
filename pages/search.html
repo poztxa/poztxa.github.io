@@ -1,38 +1,38 @@
 ---
-layout: default
-title: Search
-permalink: /search/
+title: Browse Everything
+layout: page
+foot: js/browse-all.html
 ---
 
-<!-- Tangkap parameter kueri -->
-{% assign query = page.url | split: "q=" | last | url_decode %}
+Browse all site content (or you can also use [search page]({{ '/search/' | relative_url }}) for fuzzier options).
 
-<div class="search-results">
-  <h1>Hasil Pencarian untuk "{{ query }}"</h1>
-  <div class="blog-posts hfeed index-post-wrap">
-    {% assign results = site.posts | where_exp: "post", "post.title contains query or post.excerpt contains query" %}
-    {% if results.size > 0 %}
-      {% for post in results %}
-        <article class="blog-post hentry index-post">
-          <a class="entry-image-wrap is-image" href="{{ post.url }}" title="{{ post.title }}">
-            {% if post.image %}
-              <span class="entry-thumb lazy-ify" style="background-image:url({{ post.image }})"></span>
-            {% endif %}
-          </a>
-          <div class="entry-header">
-            <span class="entry-category">{{ post.categories[0] }}</span>
-            <h2 class="entry-title">
-              <a href="{{ post.url }}">{{ post.title }}</a>
-            </h2>
-            <p>{{ post.excerpt | strip_html | truncatewords:15 }}</p>
-            <div class="entry-meta">
-              <time datetime="{{ post.date }}">{{ post.date | date: "%B %d, %Y" }}</time>
+<div id="documentList">
+    <div class="input-group mb-3">
+        <input type="text" id="listSearch" class="form-control form-control-lg search" aria-label="Text input to filter list" placeholder="Filter...">
+        <button class="btn btn-lg btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseListOptions" aria-expanded="false" aria-controls="collapseListOptions">options</button>
+        <div class="collapse w-100" id="collapseListOptions">
+            <div class="card card-body">
+                <p>Sort by:</p>
+                <p>
+                    <input type="radio" class="btn-check" name="sort_list" id="list_shuffle" autocomplete="off" checked>
+                    <label class="btn btn-outline-info m-1" for="list_shuffle">Random</label>
+                    <input type="radio" class="btn-check sort" name="sort_list" id="list_title" autocomplete="off" data-sort="listTitle">
+                    <label class="btn btn-outline-info m-1" for="list_title">Title</label>
+                    <input type="radio" class="btn-check sort" name="sort_list" id="list_type" autocomplete="off" data-sort="listType">
+                    <label class="btn btn-outline-info m-1" for="list_type">Type</label>
+                </p>
+                <p>View item types:</p>
+                <p>
+                    <input type="radio" class="btn-check" name="filterRadio" id="filter-all" autocomplete="off" value="show-all" checked>
+                    <label class="btn btn-outline-primary m-1" for="filter-all">All</label>
+                    {% assign types = site.documents | where_exp: 'i','i.ignore != true' | map: 'type' | compact | uniq %}
+                    {% for t in types %}
+                    <input type="radio" class="btn-check" name="filterRadio" id="filter-{{ t | slugify }}" autocomplete="off" value="{{ t }}">
+                    <label class="btn btn-outline-primary m-1" for="filter-{{ t | slugify }}">{{ t }}</label>
+                    {% endfor %}
+                </p>
             </div>
-          </div>
-        </article>
-      {% endfor %}
-    {% else %}
-      <p>Tidak ada hasil ditemukan untuk "{{ query }}".</p>
-    {% endif %}
-  </div>
+        </div>
+    </div>
+    <div class="mt-5 list row row-cols-1 row-cols-md-2"></div>
 </div>
