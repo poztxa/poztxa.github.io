@@ -10,30 +10,48 @@ permalink: /search/
 	
 </div>
 
+<div id="results"></div>
+
 <script>
-	var JEKYLL_POSTS = [];
-	{% for post in site.posts %}
-	JEKYLL_POSTS.push({
-		title: "{{ post.title }}",
-		link: "{{ post.url | prepend: site.baseurl }}",
-		content: {{ post.content | markdownify | strip_html | jsonify }}
-	}); 
+    var JEKYLL_POSTS = [];
+    {% for post in site.posts %}
+    JEKYLL_POSTS.push({
+        title: "{{ post.title }}",
+        link: "{{ post.url | prepend: site.baseurl }}",
+        image: "{{ post.image | default: '/assets/images/default.jpg' }}", // Tambahkan image
+        category: "{{ post.category | default: 'Uncategorized' }}",        // Tambahkan kategori
+        excerpt: "{{ post.excerpt | default: '' }}",                       // Tambahkan excerpt
+        author: "{{ post.author | default: 'Anonymous' }}",                // Tambahkan penulis
+        date: "{{ post.date | date: '%Y-%m-%d' | default: '' }}",          // Tambahkan tanggal
+        content: {{ post.content | markdownify | strip_html | jsonify }}
+    });
     {% endfor %}
 
-	{% for doc in site.docs %}
-	JEKYLL_POSTS.push({
-		title: "{{ doc.title }}",
-		link: "{{ doc.url | prepend: site.baseurl }}",
-		content: {{ doc.content | markdownify | strip_html | jsonify }}
-	}); 
-    {% endfor %}    
+    {% for doc in site.docs %}
+    JEKYLL_POSTS.push({
+        title: "{{ doc.title }}",
+        link: "{{ doc.url | prepend: site.baseurl }}",
+        image: "{{ doc.image | default: '/assets/images/default.jpg' }}", // Sama seperti di atas
+        category: "{{ doc.category | default: 'Uncategorized' }}",
+        excerpt: "{{ doc.excerpt | default: '' }}",
+        author: "{{ doc.author | default: 'Anonymous' }}",
+        date: "{{ doc.date | date: '%Y-%m-%d' | default: '' }}",
+        content: {{ doc.content | markdownify | strip_html | jsonify }}
+    });
+    {% endfor %}
 </script>
+
 <script src="{{ "/assets/js/search.js" | prepend: site.baseurl }}"></script>
 <script>
-	new jekyllSearch({
-		selector: "#results",
-		properties: ["title", "content"]
-	});
+    new jekyllSearch({
+        selector: "#results",
+        properties: ["title", "content"],
+        onResults: function(results) {
+            var resultsElement = document.querySelector("#results");
+            resultsElement.innerHTML = ""; // Hapus hasil lama
+            outputResults(query, results, resultsElement); // Render dengan fungsi modifikasi
+        }
+    });
 </script>
 
 
