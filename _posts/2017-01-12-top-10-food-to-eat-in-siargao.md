@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Top 10 Food to Eat in Siargao"
+title:  Top 10 Food to Eat in Siargao
 author: Summer
 categories: [Popular, Food]
 image: assets/images/coconutchiaresize.png
