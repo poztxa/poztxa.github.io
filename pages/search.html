@@ -18,15 +18,7 @@ permalink: /search/
 		link: "{{ post.url | prepend: site.baseurl }}",
 		content: {{ post.content | markdownify | strip_html | jsonify }}
 	}); 
-    {% endfor %}
-
-	{% for doc in site.docs %}
-	JEKYLL_POSTS.push({
-		title: "{{ doc.title }}",
-		link: "{{ doc.url | prepend: site.baseurl }}",
-		content: {{ doc.content | markdownify | strip_html | jsonify }}
-	}); 
-    {% endfor %}    
+    {% endfor %}  
 </script>
 <script src="{{ "/assets/js/search.js" | prepend: site.baseurl }}"></script>
 <script>
