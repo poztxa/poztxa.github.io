@@ -89,32 +89,36 @@
 
     };
 
-    var outputResults = function(query, results, el) {
+var outputResults = function(query, results, el) {
+    var frag = document.createDocumentFragment();
 
-        var frag = document.createDocumentFragment();
-        var pageTitle = document.createElement("h1");
-        pageTitle.appendChild(document.createTextNode("Search results for \"" + query + "\""));
-        frag.appendChild(pageTitle);
-        results.forEach(function(result) {
+    // Create the new structure for the query message
+    var queryMessage = document.createElement("div");
+    queryMessage.className = "queryMessage";
 
-            var div = document.createElement("div");
-            div.className = "search-result";
+    var queryInfo = document.createElement("span");
+    queryInfo.className = "query-info query-success";
+    queryInfo.appendChild(document.createTextNode("\"" + query + "\""));
 
-            var title = document.createElement("h2");
-            var link = document.createElement("a");
-            link.href = result.link;
-            link.appendChild(document.createTextNode(result.title));
-            title.appendChild(link);
+    queryMessage.appendChild(queryInfo);
+    frag.appendChild(queryMessage);
 
-            div.appendChild(title);
+    results.forEach(function(result) {
+        var div = document.createElement("div");
+        div.className = "search-result";
 
-            frag.appendChild(div);
+        var title = document.createElement("h2");
+        var link = document.createElement("a");
+        link.href = result.link;
+        link.appendChild(document.createTextNode(result.title));
+        title.appendChild(link);
 
-        });
+        div.appendChild(title);
+        frag.appendChild(div);
+    });
 
-        el.appendChild(frag);
-
-    };
+    el.appendChild(frag);
+};
 
     var Search = function(options) {
 
