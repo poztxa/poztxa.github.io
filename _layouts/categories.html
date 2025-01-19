@@ -36,17 +36,17 @@ layout: default
           </div> <!-- End of .blog-posts -->
 
           <!-- Load More Pagination -->
-          <div class='blog-pager' id='blog-pager'>
-            {% if current_page < total_pages %}
-              <a class='blog-pager-older-link btn load-more' href='/categories/{{ page.category }}/page{{ current_page | plus: 1 }}' id='supermag-pro-load-more-link'>
-                Load More Posts
-              </a>
-              <span class='loading'><div class='loader'></div></span>
-              <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
-            {% else %}
-              <span class='no-more btn load-more show'>No More Posts</span>
-            {% endif %}
-          </div>
+<div class='blog-pager' id='blog-pager'>
+  {% if paginator.next_page %}
+    <a class='blog-pager-older-link btn load-more' href='/page{{ paginator.next_page }}' id='supermag-pro-load-more-link'>
+      Load More Posts
+    </a>
+    <span class='loading'><div class='loader'></div></span>
+    <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
+  {% else %}
+    <span class='no-more btn load-more show'>No More Posts</span>
+  {% endif %}
+</div>
 
         </div>
       </div>
