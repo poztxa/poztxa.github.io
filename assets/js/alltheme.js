@@ -164,30 +164,4 @@ $(document).ready(function() {
   });
 
 
-
-
-
-!function(o){
-    o.fn.lazyify=function(){
-        return this.each(function(){
-            var t=o(this),
-                a=o(window),
-                n=t.attr("data-image"),
-                e="w"+Math.round(t.width()+t.width()/10)+"-h"+Math.round(t.height()+t.height()/10)+"-p-k-no-nu",
-                r="";
-            n.match("resources.blogblog.com")&&(n=noThumbnail);
-            r=n.match("/s72-c")?n.replace("/s72-c","/"+e):n.match("/w72-h")?n.replace("/w72-h72-p-k-no-nu","/"+e):n.match("=w72-h")?n.replace("=w72-h72-p-k-no-nu","="+e):n;
-            t.is(":hidden")||a.on("load resize scroll",function o(){
-                if(a.scrollTop()+a.height()>=t.offset().top){
-                    a.off("load resize scroll",o);
-                    var n=new Image;
-                    n.onload=function(){
-                        t.attr("style","background-image:url("+this.src+")").addClass("lazy-ify")
-                    },
-                    n.src=r
-                }
-            }).trigger("scroll")
-        })
-    }
-}(jQuery);
- 
+!function(o){o.fn.lazyify=function(){return this.each(function(){var t=o(this),a=o(window),n=t.attr("data-image"),e="w"+Math.round(t.width()+t.width()/10)+"-h"+Math.round(t.height()+t.height()/10)+"-p-k-no-nu",r="";n.match("resources.blogblog.com")&&(n=noThumbnail),r=n.match("/s72-c")?n.replace("/s72-c","/"+e):n.match("/w72-h")?n.replace("/w72-h72-p-k-no-nu","/"+e):n.match("=w72-h")?n.replace("=w72-h72-p-k-no-nu","="+e):n,t.is(":hidden")||a.on("load resize scroll",function o(){if(a.scrollTop()+a.height()>=t.offset().top){a.off("load resize scroll",o);var n=new Image;n.onload=function(){t.attr("style","background-image:url("+this.src+")").addClass("lazy-ify")},n.src=r}}).trigger("scroll")})}}(jQuery);
