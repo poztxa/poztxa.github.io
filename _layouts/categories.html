@@ -11,16 +11,23 @@ layout: default
 
 <div class="queryMessage">
   <span class="query-info query-label query-success">
-    {{ page.title }}
+    Categories
   </span>
 </div>
 
-{% assign group_name = page.path | split: "/" | first %}
+<ul class="category-list">
+  {% assign categories = site.posts | map: 'category' | uniq %}
+  {% for category in categories %}
+    <li>
+      <a href="{{ site.baseurl }}/category/{{ category | slugify }}">{{ category }}</a>
+    </li>
+  {% endfor %}
+</ul>
 
-{% if group_name == "category" %}
-  {% assign current_category = page.title %}
-  {% assign filtered_posts = site.posts | where: "category", current_category %}
-
+{% if page.category %}
+  <h2>Posts in {{ page.category }}</h2>
+  {% assign filtered_posts = site.posts | where: "category", page.category %}
+  
   {% if filtered_posts.size > 0 %}
     {% for post in filtered_posts %}
       {% include post_list.html post=post %}
@@ -28,10 +35,10 @@ layout: default
   {% else %}
     <p>No posts available for this category.</p>
   {% endif %}
-
 {% else %}
-  <p>No posts available for this category.</p>
+  <p>Select a category to see the posts.</p>
 {% endif %}
+
 
 
         </div>
