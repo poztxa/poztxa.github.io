@@ -1,7 +1,5 @@
 ---
 layout: default
-paginate: 5
-paginate_path: "/categories/:category/page:num"
 ---
 <div class="flex-center" id="content-wrapper" style="transform: none;">
   <div class="container row-x1" style="transform: none;">
@@ -18,37 +16,16 @@ paginate_path: "/categories/:category/page:num"
             </span>
           </div>
 
-          <!-- Blog Posts -->
-          <div class="blog-posts hfeed index-post-wrap">
-            {% assign current_category = page.category | default: page.title %}
-            {% assign posts_per_page = 5 %}
-            {% assign total_posts = site.categories[current_category] | size %}
-            {% assign total_pages = total_posts | divided_by: posts_per_page | ceil %}
-            {% assign current_page = page.page | default: 1 %}
-            {% assign start_index = (current_page - 1) * posts_per_page %}
-            {% assign paginated_posts = site.categories[current_category] | slice: start_index, posts_per_page %}
+{% assign group_name = page.path | split: "/" | first %}
 
-            {% if total_posts > 0 %}
-              {% for post in paginated_posts %}
-                {% include postbox.html %}
-              {% endfor %}
-            {% else %}
-              <p>No posts found in this category.</p>
-            {% endif %}
-          </div> <!-- End of .blog-posts -->
+{% case group_name %}
+  {% when 'category' %}
+    {% assign groups = site.categories %}
+  {% when 'tag' %}
+    {% assign groups = site.tags %}
+{% endcase %}
 
-          <!-- Load More Pagination -->
-          <div class='blog-pager' id='blog-pager'>
-            {% if current_page < total_pages %}
-              <a class='blog-pager-older-link btn load-more' href='/categories/{{ page.category }}/page{{ current_page | plus: 1 }}' id='supermag-pro-load-more-link'>
-                Load More Posts
-              </a>
-              <span class='loading'><div class='loader'></div></span>
-              <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
-            {% else %}
-              <span class='no-more btn load-more show'>No More Posts</span>
-            {% endif %}
-          </div>
+{% include group_list.html groups=groups %}
 
         </div>
       </div>
