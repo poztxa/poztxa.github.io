@@ -15,16 +15,11 @@ layout: default
             </span>
           </div>
 
-{% assign group_name = page.path | split: "/" | first %}
-
-{% case group_name %}
-  {% when 'category' %}
-    {% assign groups = site.categories %}
-  {% when 'tag' %}
-    {% assign groups = site.tags %}
-{% endcase %}
-
-{% include group_list.html groups=groups %}
+    {% for post in site.posts %}
+    {% if post.category contains page.category %}
+    {% include post_list.html %}
+    {% endif %}
+    {% endfor %}
 
 
 
