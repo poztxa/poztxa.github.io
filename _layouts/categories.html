@@ -19,29 +19,37 @@ layout: default
 
           <!-- Blog Posts -->
           <div class="blog-posts hfeed index-post-wrap">
-            {% assign current_category = page.category | default: page.title %}
-            {% if site.categories[current_category] %}
-              {% for post in site.categories[current_category] %}
-                {% include postbox.html %}
-              {% endfor %}
-            {% else %}
-              <p>No posts found in this category.</p>
-            {% endif %}
-          </div> <!-- End of .blog-posts -->
+  {% assign current_category = page.category | default: page.title %}
+  {% if paginator.posts %}
+    {% for post in paginator.posts %}
+      {% if post.categories contains current_category %}
+        {% include postbox.html %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <p>No posts found in this category.</p>
+  {% endif %}
+</div> <!-- End of .blog-posts -->
 
-          <!-- Pagination -->
-          <div class="blog-pager" id="blog-pager">
-            {% assign category_url = site.baseurl | append: '/categories/' | append: page.category %}
-            {% if paginator.next_page %}
-              <a class="blog-pager-older-link btn load-more" href="{{ category_url }}/page{{ paginator.next_page }}" id="supermag-pro-load-more-link">
-                Load More Posts
-              </a>
-              <span class="loading"><div class="loader"></div></span>
-              <span class="no-more btn load-more" style="display:none;">No More Posts</span>
-            {% else %}
-              <span class="no-more btn load-more show">No More Posts</span>
-            {% endif %}
-          </div>
+<!-- Pagination -->
+<div class="blog-pager" id="blog-pager">
+  {% assign category_url = site.baseurl | append: '/categories/' | append: current_category %}
+  
+  {% if paginator.previous_page %}
+    <a class="blog-pager-newer-link btn" href="{{ category_url }}/page{{ paginator.previous_page }}" id="supermag-pro-prev-page-link">
+      Previous
+    </a>
+  {% endif %}
+
+  {% if paginator.next_page %}
+    <a class="blog-pager-older-link btn load-more" href="{{ category_url }}/page{{ paginator.next_page }}" id="supermag-pro-load-more-link">
+      Load More Posts
+    </a>
+  {% else %}
+    <span class="no-more btn load-more show">No More Posts</span>
+  {% endif %}
+</div>
+
 
         </div>
       </div>
