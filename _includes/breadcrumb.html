@@ -1,0 +1,44 @@
+<nav id="breadcrumb">
+  <a class="home" href="{{ site.url }}">Home</a>
+  <em class="delimiter"></em>
+  {% if page.categories %}
+    {% assign categories = page.categories | split: ',' %}
+    {% for category in categories %}
+      <a class="label" href="{{ site.url }}/categories/{{ category | slugify }}/">{{ category }}</a>
+      <em class="delimiter"></em>
+    {% endfor %}
+  {% endif %}
+  <span class="current">{{ page.title }}</span>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}"
+    }
+    {% if page.categories %}
+      {% assign categories = page.categories | split: ',' %}
+      {% for category in categories %}
+      ,{
+        "@type": "ListItem",
+        "position": {{ forloop.index | plus: 1 }},
+        "name": "{{ category }}",
+        "item": "{{ site.url }}/categories/{{ category | slugify }}/"
+      }
+      {% endfor %}
+    {% endif %}
+    ,{
+      "@type": "ListItem",
+      "position": {{ page.categories | size | plus: 2 }},
+      "name": "{{ page.title }}",
+      "item": "{{ page.url | absolute_url }}"
+    }
+  ]
+}
+</script>
