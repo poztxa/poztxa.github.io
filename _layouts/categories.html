@@ -22,7 +22,7 @@ layout: default
   {% assign filtered_posts = site.posts | where: "category", current_category %}
   <div class="row">
     {% for post in filtered_posts %}
-      {% include post_list_item.html post=post %}
+      {% include post_list.html post=post %}
     {% endfor %}
   </div>
 {% else %}
