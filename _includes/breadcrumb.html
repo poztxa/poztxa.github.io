@@ -4,11 +4,11 @@
   {% if page.categories %}
     {% assign categories = page.categories | split: ',' %}
     {% for category in categories %}
-      <a class="label" href="{{ site.url }}/categories/{{ category | slugify }}/">{{ category }}</a>
+      <a class="label" href="{{ site.url }}/categories/{{ category | slugify }}/">{{ category | strip | escape }}</a>
       <em class="delimiter"></em>
     {% endfor %}
   {% endif %}
-  <span class="current">{{ page.title }}</span>
+  <span class="current">{{ page.title | escape }}</span>
 </nav>
 
 <script type="application/ld+json">
@@ -28,7 +28,7 @@
       ,{
         "@type": "ListItem",
         "position": {{ forloop.index | plus: 1 }},
-        "name": "{{ category }}",
+        "name": "{{ category | strip | escape }}",
         "item": "{{ site.url }}/categories/{{ category | slugify }}/"
       }
       {% endfor %}
@@ -36,7 +36,7 @@
     ,{
       "@type": "ListItem",
       "position": {{ page.categories | size | plus: 2 }},
-      "name": "{{ page.title }}",
+      "name": "{{ page.title | escape }}",
       "item": "{{ page.url | absolute_url }}"
     }
   ]
