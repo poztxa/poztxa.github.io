@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <div class="flex-center" id="content-wrapper" style="transform: none;">
   <div class="container row-x1" style="transform: none;">
 
@@ -20,10 +21,10 @@ layout: default
           <div class="blog-posts hfeed index-post-wrap">
             {% assign current_category = page.category | default: page.title %}
             {% if site.categories[current_category] %}
-              {% for post in site.categories[current_category] %}
-
+              {% assign posts = site.categories[current_category] %}
+              {% assign paginated_posts = posts | slice: paginator.offset, paginator.per_page %}
+              {% for post in paginated_posts %}
                 {% include postbox.html %}
-            
               {% endfor %}
             {% else %}
               <p>No posts found in this category.</p>
