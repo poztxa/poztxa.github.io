@@ -1,5 +1,5 @@
 ---
 layout: category
 title: category/travel
-permalink: '/category/travel'
+permalink: '/category/travel/'
 ---
