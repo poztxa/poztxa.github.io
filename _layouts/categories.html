@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <div class="flex-center" id="content-wrapper" style="transform: none;">
   <div class="container row-x1" style="transform: none;">
 
@@ -21,9 +22,7 @@ layout: default
             {% assign current_category = page.category | default: page.title %}
             {% if site.categories[current_category] %}
               {% for post in site.categories[current_category] %}
-
                 {% include postbox.html %}
-            
               {% endfor %}
             {% else %}
               <p>No posts found in this category.</p>
@@ -31,20 +30,18 @@ layout: default
           </div> <!-- End of .blog-posts -->
 
           <!-- Pagination -->
-<div class="blog-pager" id="blog-pager">
-  {% assign category_url = site.baseurl | append: '/categories/' | append: page.category %}
-  
-  {% if paginator.next_page %}
-    <a class="blog-pager-older-link btn load-more" href="{{ category_url }}/page{{ paginator.next_page }}" id="supermag-pro-load-more-link">
-      Load More Posts
-    </a>
-    <span class="loading"><div class="loader"></div></span>
-    <span class="no-more btn load-more" style="display:none;">No More Posts</span>
-  {% else %}
-    <span class="no-more btn load-more show">No More Posts</span>
-  {% endif %}
-</div>
-
+          <div class="blog-pager" id="blog-pager">
+            {% assign category_url = site.baseurl | append: '/categories/' | append: page.category %}
+            {% if paginator.next_page %}
+              <a class="blog-pager-older-link btn load-more" href="{{ category_url }}/page{{ paginator.next_page }}" id="supermag-pro-load-more-link">
+                Load More Posts
+              </a>
+              <span class="loading"><div class="loader"></div></span>
+              <span class="no-more btn load-more" style="display:none;">No More Posts</span>
+            {% else %}
+              <span class="no-more btn load-more show">No More Posts</span>
+            {% endif %}
+          </div>
 
         </div>
       </div>
