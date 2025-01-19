@@ -2,7 +2,8 @@
 layout: post
 title:  Travel Guide Denver Colorado
 author: Summer
-categories: Travel
+categories: 
+ - Travel
 image: assets/images/DenverCover.jpg
 ---
 <iframe width="560" height="315" src="https://www.youtube.com/embed/wI6D4yprQ90" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
