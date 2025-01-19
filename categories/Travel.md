@@ -1,5 +1,5 @@
 ---
 layout: categories
-Title: Travel
+title: Travel
 permalink: '/categories/travel/'
 ---
