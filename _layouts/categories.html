@@ -35,20 +35,16 @@ layout: default
             {% endif %}
           </div> <!-- End of .blog-posts -->
 
-          <!-- Pagination -->
-          <div class="blog-pager" id="blog-pager">
-            {% assign category_url = site.baseurl | append: '/categories/' | append: page.category %}
-            
-            {% if current_page > 1 %}
-              <a class="blog-pager-older-link btn" href="{{ category_url }}/page{{ current_page | minus: 1 }}">
-                Previous Page
-              </a>
-            {% endif %}
-
+          <!-- Load More Pagination -->
+          <div class='blog-pager' id='blog-pager'>
             {% if current_page < total_pages %}
-              <a class="blog-pager-older-link btn" href="{{ category_url }}/page{{ current_page | plus: 1 }}">
-                Next Page
+              <a class='blog-pager-older-link btn load-more' href='/categories/{{ page.category }}/page{{ current_page | plus: 1 }}' id='supermag-pro-load-more-link'>
+                Load More Posts
               </a>
+              <span class='loading'><div class='loader'></div></span>
+              <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
+            {% else %}
+              <span class='no-more btn load-more show'>No More Posts</span>
             {% endif %}
           </div>
 
