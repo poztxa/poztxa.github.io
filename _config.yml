@@ -9,6 +9,7 @@ favicon: 'assets/images/favicon.ico'
 author: Summer
 paginate: 5
 paginate_path: "/page:num/"
+paginate_path: "/categories/:category/page:num/"
 disqus: 'demowebsite'
 locale: en_us
 lang: en_us
