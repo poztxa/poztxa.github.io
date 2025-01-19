@@ -21,9 +21,15 @@ paginate_path: "/categories/:category/page:num"
           <!-- Blog Posts -->
           <div class="blog-posts hfeed index-post-wrap">
             {% assign current_category = page.category | default: page.title %}
+            {% assign posts_per_page = 5 %}
+            {% assign total_posts = site.categories[current_category] | size %}
+            {% assign total_pages = total_posts | divided_by: posts_per_page | ceil %}
+            {% assign current_page = page.page | default: 1 %}
+            {% assign start_index = (current_page - 1) * posts_per_page %}
+            {% assign paginated_posts = site.categories[current_category] | slice: start_index, posts_per_page %}
 
-            {% if paginator.posts.size > 0 %}
-              {% for post in paginator.posts %}
+            {% if total_posts > 0 %}
+              {% for post in paginated_posts %}
                 {% include postbox.html %}
               {% endfor %}
             {% else %}
@@ -33,8 +39,8 @@ paginate_path: "/categories/:category/page:num"
 
           <!-- Load More Pagination -->
           <div class='blog-pager' id='blog-pager'>
-            {% if paginator.next_page %}
-              <a class='blog-pager-older-link btn load-more' href='{{ paginator.next_page }}' id='supermag-pro-load-more-link'>
+            {% if current_page < total_pages %}
+              <a class='blog-pager-older-link btn load-more' href='/categories/{{ page.category }}/page{{ current_page | plus: 1 }}' id='supermag-pro-load-more-link'>
                 Load More Posts
               </a>
               <span class='loading'><div class='loader'></div></span>
@@ -59,3 +65,4 @@ paginate_path: "/categories/:category/page:num"
 
   </div>
 </div>
+
