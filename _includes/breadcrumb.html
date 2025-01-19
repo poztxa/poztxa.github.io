@@ -1,9 +1,8 @@
 <nav id="breadcrumb">
-  <a class="home" href="{{ site.url }}">Home</a>
+  <a class="home" href="{{ site.url }}">Beranda</a>
   <em class="delimiter"></em>
   {% if page.categories %}
-    {% assign categories = page.categories | split: ',' %}
-    {% for category in categories %}
+    {% for category in page.categories %}
       <a class="label" href="{{ site.url }}/categories/{{ category | slugify }}/">{{ category | strip | escape }}</a>
       <em class="delimiter"></em>
     {% endfor %}
@@ -19,12 +18,11 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Home",
+      "name": "Beranda",
       "item": "{{ site.url }}"
     }
     {% if page.categories %}
-      {% assign categories = page.categories | split: ',' %}
-      {% for category in categories %}
+      {% for category in page.categories %}
       ,{
         "@type": "ListItem",
         "position": {{ forloop.index | plus: 1 }},
