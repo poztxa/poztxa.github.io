@@ -1,5 +1,5 @@
 ---
 layout: categories
-title: Travel
+title: Popular
 permalink: '/category/popular/'
 ---
