@@ -9,66 +9,48 @@ layout: default
 
 
 
-<div class="home">
-    {%- if page.title -%}
-    <h4 class="page-heading">{{ page.title }}</h4>
-    {%- endif -%}
-
-    <p>
-        {%- for category in site.categories -%}
-        <a href="{{category.title | downcase}}.html">{{ category.title }}</a> |&nbsp
-        {%- endfor -%}
-    </p>
-            <!-- This variable is needed for the comparison -->
-            {% assign category = page.title|downcase %}
-            <!-- Now we can loop through -->
-        {% for post in site.posts %}
-        {% if post.categories contains {{category}}  %}
-            <li><a href="{{post.url}}">{{ post.title }}</a></li>
-        {% endif %}
+    <h1 class="w3-xlarge">Articles by category: {{ page.categories }}</h1>
+    <hr />
+    {% for category in site.categories %}
+        {% capture category_slug %}{{ category | first }}{% endcapture %}
+        {% for c_slug in category_slug %}
+            {% if c_slug == page.categories %}
+                <button class="w3-button w3-red w3-ripple">{{ c_slug | replace: '_' , ' ' }}</button>
+            {% else %}
+                <a href="{{ site.url }}{{site.baseurl}}/category/{{ c_slug }}" class="w3-button w3-red w3-ripple w3-hover-green">{{ c_slug | replace: '_',' ' }}</a>
+            {% endif %}
         {% endfor %}
-
-
-    {%- if site.posts.size > 0 -%}
-    <h4 class="post-list-heading">{{ page.list_title }}</h4>
-    <ul class="post-list">
-        {%- for post in paginator.posts -%}
-        <li>
-            {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-            <span class="post-meta">{{ post.date | date: date_format }}</span>
-            <h5>
-                <a class="post-link" href="{{ post.url | relative_url }}">
-                    {{ post.title | escape }}
-                    {{ post.category }}
-
-                </a>
-            </h5>
-            {%- if site.show_excerpts -%}
-            {{ post.excerpt }}
-            {%- endif -%}
-        </li>
-        {%- endfor -%}
-    </ul>
-
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</></p>
-    {%- endif -%}
-
-</div>
-
-<!-- Pagination links -->
-<div class="pagination">
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+    {% endfor %}
+    <hr />
+    {% if site.categories[page.categories] %}
+        {% for post in site.categories[page.categories] %}
+         <div class="container">
+             {% if page.img_url == true %}
+             <img src="{{ post.img }}" alt="post-img" class="w3-image">
+             {% else %}
+             <img src="{{ site.baseurl }}{{ post.img }}" alt="post-img" class="w3-image">
+             {% endif %}
+         </div>
+    <h3><b>{{ post.title }}</b></h3>
+      {% capture post_year %}{{ post.date | date: '%Y' }}{% endcapture %}
+      {% if forloop.first %}
+      {% endif %} 
+            {% if forloop.first == false %}
+                {% assign previous_index = forloop.index0 | minus: 1 %}
+                {% capture previous_post_year %}{{ site.categories[page.categories][previous_index].date | date: '%Y' }}{% endcapture %}
+                {% if post_year != previous_post_year %}
+                {% endif %}
+            {% endif %}
+           <span class="w3-opacity"><i class="fa fa-calendar" aria-hidden="true"></i> Posted on {{ post.date | date_to_string }}
+             </span><span class="w3-tag w3-gray" style="text-decoration:none;transform:rotate(-5deg)"><a href="{{ site.url }}{{ site.baseurl }}/category/{{ post.category }}"><i class="fas fa-folder"></i> {{ post.category | replace:'_',' ' }}</a></span>
+            <p>{{ post.content | strip_html | truncatewords: 40 }}</p>
+            <a href="{{ post.url |prepend:site.baseurl }}" class="w3-button w3-black">Read More</a>
+            <hr />
+{% endfor %}
+</div>                                                                      
     {% else %}
-    <span class="previous">Previous</span>
+<p>There are no posts in this categories.</p>
     {% endif %}
-    <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
-    {% else %}
-    <span class="next ">Next</span>
-    {% endif %}
-</div>
   
 
 </div></div></main>
