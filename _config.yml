@@ -24,6 +24,9 @@ sass:
   style: :compressed
 ganalytics: G-S07GSKMHZF
 
+paginate_category_basepath: '/c/:name/'
+paginate_category_layout: 'categories.html'
+
 version_params:
 version_dir: "v1.0"
  # Disable so older versions cannot be searched
