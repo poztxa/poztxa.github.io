@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Travel
-category: travel
+category: Travel
 permalink: '/category/travel/'
 ---
 
