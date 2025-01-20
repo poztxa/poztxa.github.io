@@ -9,23 +9,26 @@ layout: default
 
 
 
+{% assign current_category = page.title | downcase %}
 {% for category in site.categories %}
-<h4 class="mt-5 mb-4 pb-2 border-bottom" id="{{ category[0] | replace: " ","-" }}"><span class="text-capitalize small font-weight-bold">"{{ category[0] }}"</span></h4>
-<div class="row">
-{% assign pages_list = category[1] %}
-{% for post in pages_list %}
-{% if post.title != null %}
-{% if group == null or group == post.group %}
-<div class="blog-posts hfeed index-post-wrap" id="post-list">
- {% include post_list_item.html %}
-</div>
-{% endif %}
-{% endif %}
+  {% if category[0] == current_category %}
+    <h4 class="mt-5 mb-4 pb-2 border-bottom" id="{{ category[0] | replace: " ","-" }}">
+      <span class="text-capitalize small font-weight-bold">{{ category[0] }}</span>
+    </h4>
+    <div class="row">
+      {% assign pages_list = category[1] %}
+      {% for post in pages_list %}
+        {% if post.title != null %}
+          <div class="blog-posts hfeed index-post-wrap" id="post-list">
+            {% include post_list_item.html %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
 {% endfor %}
-{% assign pages_list = nil %}
-{% assign group = nil %}
-</div>
-{% endfor %}
+
+  
   
 
 </div></div></main>
