@@ -10,14 +10,8 @@ author: Summer
 paginate: 5
 paginate_path: "/page:num/"
 
-pagination:
-  enabled: true
-  per_page: 5
-  categories:
-    travel:
-      path: "/category/travel/page/:num/"
-    food:
-      path: "/category/food/page/:num/"
+paginate_category_basepath: '/category/:name/'
+paginate_category_layout: 'categories'
 
 disqus: 'demowebsite'
 locale: en_us
@@ -58,13 +52,11 @@ social:
   facebook: https://www.facebook.com/summerislive
   twitter: https://twitter.com/summerislive
 
-gems:
-  - jekyll-paginate-v2
 
 # Plugins
 plugins: 
 - jekyll-paginate
-- jekyll-paginate-v2
+- jekyll-paginate-categories
 - jekyll-sitemap
 - jekyll-feed
 - jekyll-seo-tag
