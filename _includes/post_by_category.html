@@ -6,8 +6,9 @@
 
 <div class="home" id="home">
   <h1 class="pageTitle">{{page.title}}</h1>
+{% if paginator %}
   <ul class="posts noList">
-    {% for post in site.posts %}
+    {% for post in paginator.posts %}
       {% if post.categories contains page.category %}
   		<li>
 	        <span class="date">{{ post.date | date: '%B %d, %Y' }}</span>
@@ -18,14 +19,19 @@
     {% endfor %}
   </ul>
   <!-- Pagination links -->
-  <div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="previous button__outline">Newer Posts</a> 
-    {% endif %}
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="next button__outline">Older Posts</a>
-    {% endif %}
-  </div>
+    <div class='blog-pager' id='blog-pager'>
+        {% if paginator.next_page %}
+            <a class='blog-pager-older-link btn load-more' href='{{ paginator.next_page_path | relative_url }}' id='supermag-pro-load-more-link'>
+                Load More
+            </a>
+            <span class='loading'><div class='loader'></div></span>
+            <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
+        {% else %}
+            <span class='no-more btn load-more show'>No More Posts</span>
+        {% endif %}
+    </div>
+	
+{% endif %}
 </div>
 
 
