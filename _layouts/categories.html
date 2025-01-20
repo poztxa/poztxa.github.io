@@ -15,9 +15,9 @@ layout: default
   </span>
 </div>
 
-{% assign filtered_posts = site.posts | where: "categories", page.category %}
+{% assign filtered_posts = site.categories[page.category] %}
 
-{% if filtered_posts.size > 0 %}
+{% if filtered_posts %}
   <div class="blog-posts hfeed index-post-wrap" id="post-list">
     {% for post in filtered_posts %}
       {% include post_list_item.html %}
