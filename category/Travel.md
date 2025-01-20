@@ -1,5 +1,5 @@
 ---
-layout: grouped_post
+layout: categories
 title: Travel
 permalink: '/category/travel/'
 ---
