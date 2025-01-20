@@ -1,5 +1,5 @@
 ---
-layout: travel
+layout: default
 category: Travel
 title: Travel
 permalink: /category/travel
