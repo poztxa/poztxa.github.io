@@ -18,7 +18,7 @@ layout: default
 <section class="posts">
   <ul>
     {% for post in site.posts %}
-    {% if post.categorycontains page.category %}
+    {% if post.category contains page.category %}
     <li><a class="post" href="{{ site.url }}{{ site.baseurl }}/{{ post.url }}">{{ post.title }}</a><time
         datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></li>
     {% endif %}
