@@ -1,5 +1,7 @@
 ---
 layout: default
+paginate: 5
+paginate_path: "/{{ page.url }}page:num/"
 ---
 
 {% assign group_name = page.path | split: "/" | first %}
@@ -12,3 +14,31 @@ layout: default
 {% endcase %}
 
 {% include group_list.html groups=groups %}
+
+{% if paginator %}
+  <div class="blog-posts hfeed index-post-wrap">
+    {% for post in paginator.posts %}
+      {% include post_list_item.html %}
+    {% endfor %}
+  </div>
+
+  <div class="blog-pager" id="blog-pager">
+    {% if paginator.next_page %}
+      <a class="blog-pager-older-link btn load-more" href="{{ paginator.next_page_path }}">
+        Load More Posts
+      </a>
+      <span class="loading"><div class="loader"></div></span>
+      <span class="no-more btn load-more" style="display:none;">No More Posts</span>
+    {% else %}
+      <span class="no-more btn load-more show">No More Posts</span>
+    {% endif %}
+  </div>
+{% else %}
+  <div class="blog-posts hfeed index-post-wrap">
+    {% for post in site.posts %}
+      {% if post.tags or post.category %}
+        {% include post_list_item.html %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
