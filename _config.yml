@@ -24,8 +24,7 @@ sass:
   style: :compressed
 ganalytics: G-S07GSKMHZF
 
-paginate_category_basepath: '/c/:name/'
-paginate_category_layout: 'categories.html'
+
 
 version_params:
 version_dir: "v1.0"
@@ -49,10 +48,12 @@ social:
   facebook: https://www.facebook.com/summerislive
   twitter: https://twitter.com/summerislive
 
+gems:
+  - jekyll-paginate-v2
+  
 # Plugins
 plugins: 
 - jekyll-paginate
-- jekyll-paginate-category
 - jekyll-sitemap
 - jekyll-feed
 - jekyll-seo-tag
