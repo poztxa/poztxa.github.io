@@ -1,9 +1,12 @@
 ---
 layout: default
-category: Travel
+category: travel
 title: Travel
-permalink: '/category/travel/'
 paginate: true
+pagination:
+  enabled: true
+  category: travel
+permalink: "/category/travel/:num/"
 ---
 
 {% include post_by_category.html %}
