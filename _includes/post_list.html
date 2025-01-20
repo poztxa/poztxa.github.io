@@ -1,31 +1,27 @@
 {% if paginator %}
-<div class="blog-posts hfeed index-post-wrap">
-    {% for post in paginator.posts %}
-        {% include post_list_item.html %}
-    {% endfor %}
-</div>
-{% else %}
-<div class="blog-posts hfeed index-post-wrap">
-    {% for post in include.posts %}
-        {% if post.tags or post.category %}
+    <div class="blog-posts hfeed index-post-wrap" id="post-list">
+        {% for post in paginator.posts %}
             {% include post_list_item.html %}
-            {% assign displayPagi = true %}
-        {% endif %}
-    {% endfor %}
-</div>
-{% endif %}
-
-{% if displayPagi or paginator %}
-    <div class='blog-pager' id='blog-pager'>
-      {% if paginator.next_page %}
-        <a class='blog-pager-older-link btn load-more' href='/page{{ paginator.next_page }}' id='supermag-pro-load-more-link'>
-          Load More Posts
-        </a>
-        <span class='loading'><div class='loader'></div></span>
-        <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
-      {% else %}
-        <span class='no-more btn load-more show'>No More Posts</span>
-      {% endif %}
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="blog-posts hfeed index-post-wrap" id="post-list">
+        {% for post in include.posts %}
+            {% if post.tags or post.category %}
+                {% include post_list_item.html %}
+            {% endif %}
+        {% endfor %}
     </div>
 {% endif %}
-{% assign displayPagi = false %}
+
+{% if paginator %}
+    <div class="row" id="load-more-container">
+        {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | relative_url }}" id="supermag-pro-load-more-link" class="btn btn-primary">Load More</a>
+        {% endif %}
+        <div id="blog-pager">
+            <div class="loading" style="display:none;">Loading...</div>
+            <div class="no-more" style="display:none;">No more posts available.</div>
+        </div>
+    </div>
+{% endif %}
