@@ -11,6 +11,9 @@ paginate: 5
 paginate_path: "/page:num/"
 pagination:
   enabled: true
+  category: travel
+paginate_path: "/category/travel/page/:num/"
+
 disqus: 'demowebsite'
 locale: en_us
 lang: en_us
