@@ -9,6 +9,8 @@ favicon: 'assets/images/favicon.ico'
 author: Summer
 paginate: 5
 paginate_path: "/page:num/"
+pagination:
+  enabled: true
 disqus: 'demowebsite'
 locale: en_us
 lang: en_us
@@ -50,10 +52,11 @@ social:
 
 gems:
   - jekyll-paginate-v2
-  
+
 # Plugins
 plugins: 
 - jekyll-paginate
+- jekyll-paginate-v2
 - jekyll-sitemap
 - jekyll-feed
 - jekyll-seo-tag
