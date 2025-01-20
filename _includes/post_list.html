@@ -32,8 +32,8 @@
             <a href="{{ paginator.next_page_path | relative_url }}">»</a>
         {% endif %}
     {% elsif jsPagiLoaded != true %}
-        <script type="text/javascript" src="{{ '/assets/js/pagination.js' | relative_url }}"></script>
-        <script type="text/javascript" src="{{ '/assets/js/list_pagi.js' | relative_url }}"></script>
+        <script type="text/javascript" src="{{ 'https://poztxa.github.io/assets/js/pagination.js' | relative_url }}"></script>
+        <script type="text/javascript" src="{{ 'https://poztxa.github.io/assets/js/list_pagi.js' | relative_url }}"></script>
         {% assign jsPagiLoaded = true %}
     {% endif %}
 
