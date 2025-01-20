@@ -1,6 +1,8 @@
 ---
-layout: categories
+layout: travel
+category: Travel
 title: Travel
-category: travel
-permalink: '/category/travel/'
+permalink: /category/travel
 ---
+
+{% include post_by_category.html %}
