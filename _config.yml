@@ -9,10 +9,15 @@ favicon: 'assets/images/favicon.ico'
 author: Summer
 paginate: 5
 paginate_path: "/page:num/"
+
 pagination:
   enabled: true
-  category: travel
-paginate_path: "/category/travel/page/:num/"
+  per_page: 5
+  categories:
+    travel:
+      path: "/category/travel/page/:num/"
+    food:
+      path: "/category/food/page/:num/"
 
 disqus: 'demowebsite'
 locale: en_us
