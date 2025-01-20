@@ -15,7 +15,7 @@
 {% endif %}
 
 {% if paginator %}
-    <div class="row" id="load-more-container">
+    <div class="blog-pager" id="blog-pager">
         {% if paginator.next_page %}
             <a href="{{ paginator.next_page_path | relative_url }}" id="supermag-pro-load-more-link" class="btn btn-primary">Load More</a>
         {% endif %}
