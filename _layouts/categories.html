@@ -10,6 +10,7 @@ layout: default
 <div class="home" id="home">
   <h1 class="pageTitle">{{page.title}}</h1>
   <ul class="posts noList">
+	  {% for post in paginator.posts %}
     {% for post in site.posts %}
       {% if post.categories contains page.category %}
   		<li>
@@ -19,6 +20,7 @@ layout: default
       	</li>
   	  {% endif %}	
     {% endfor %}
+	  {% endfor %}
   </ul>
   <!-- Pagination links -->
   <div class="pagination">
