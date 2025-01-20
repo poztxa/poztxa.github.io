@@ -15,17 +15,6 @@ layout: default
   </span>
 </div>
 
-<section class="posts">
-  <ul>
-    {% for post in site.posts %}
-    {% if post.category contains page.category %}
-    <li><a class="post" href="{{ site.url }}{{ site.baseurl }}/{{ post.url }}">{{ post.title }}</a><time
-        datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></li>
-    {% endif %}
-    {% endfor %}
-  </ul>
-</section>
-          
 {% assign filtered_posts = site.categories[page.category] %}
 
 {% if filtered_posts %}
@@ -49,6 +38,7 @@ layout: default
 {% else %}
   <p>No posts available in this category.</p>
 {% endif %}
+
 
 
         </div>
