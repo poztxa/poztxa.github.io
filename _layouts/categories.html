@@ -16,7 +16,9 @@ layout: default
 {% for post in pages_list %}
 {% if post.title != null %}
 {% if group == null or group == post.group %}
- {% include post_list.html %}
+<div class="blog-posts hfeed index-post-wrap" id="post-list">
+ {% include post_list_item.html %}
+</div>
 {% endif %}
 {% endif %}
 {% endfor %}
