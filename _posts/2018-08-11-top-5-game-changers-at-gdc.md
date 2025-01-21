@@ -2,7 +2,7 @@
 layout: post
 title:  "Top 5 Game Changers at GDC"
 author: Summer
-categories: 
+category:
  - Travel
  - Popular
  - Gaming
