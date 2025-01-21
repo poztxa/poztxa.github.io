@@ -2,7 +2,7 @@
 layout: post
 title:  "7 Ways to Reduce Plastic Pollution"
 author: Summer
-categories: 
+category:
  - Travel
  - Popular
  - Sustainability
