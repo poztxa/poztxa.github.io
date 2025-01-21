@@ -2,7 +2,7 @@
 layout: post
 title:  Top 10 Food to Eat in Siargao
 author: Summer
-categories: 
+category: 
  - Travel
  - Popular
  - Food
