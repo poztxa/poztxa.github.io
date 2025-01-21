@@ -9,10 +9,6 @@ favicon: 'assets/images/favicon.ico'
 author: Summer
 paginate: 5
 paginate_path: "/page:num/"
-
-paginate_category_basepath: '/category/:name/'
-paginate_category_layout: 'categories'
-
 disqus: 'demowebsite'
 locale: en_us
 lang: en_us
@@ -29,6 +25,42 @@ sass:
 ganalytics: G-S07GSKMHZF
 
 
+autopages:
+  enabled: true
+
+  categories:
+    layouts:
+      - "archive.html"
+    title: "Posts in category #:cat"
+    permalink: "/category/:cat"
+    silent: false
+    slugify:
+      mode: "default"
+      case: true
+
+  collections:
+    enabled: false
+
+  tags:
+    layouts:
+      - "archive.html"
+    title: "Posts tagged with #:tag"
+    permalink: "/tag/:tag"
+    silent: false
+    slugify:
+      mode: "default"
+      case: true
+
+  authors:
+    enabled: true
+    data: "_data/authors.yml"
+    layouts:
+      - "author.html"
+    title: "Posts by :author"
+    permalink: "/author/:author/"
+    slugify:
+      mode: "default"
+      cased: true
 
 version_params:
 version_dir: "v1.0"
