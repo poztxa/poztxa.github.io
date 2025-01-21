@@ -1,11 +1,11 @@
 <div class='blog-pager' id='blog-pager'>
   {% if paginator.next_page %}
     <a class='blog-pager-older-link btn load-more' href='/page{{ paginator.next_page }}' id='supermag-pro-load-more-link'>
-      Load More Posts
+      Load More
     </a>
     <span class='loading'><div class='loader'></div></span>
-    <span class='no-more btn load-more' style='display:none;'>No More Posts</span>
+    <span class='no-more btn load-more' style='display:none;'>That is All</span>
   {% else %}
-    <span class='no-more btn load-more show'>No More Posts</span>
+    <span class='no-more btn load-more show'>That is All</span>
   {% endif %}
 </div>
