@@ -7,8 +7,6 @@ permalink: "/:title/"
 logo: 'assets/images/logo40.png'
 favicon: 'assets/images/favicon.ico'
 author: Summer
-paginate: 5
-paginate_path: "/page:num/"
 disqus: 'demowebsite'
 locale: en_us
 lang: en_us
@@ -24,7 +22,11 @@ sass:
   style: :compressed
 ganalytics: G-S07GSKMHZF
 
-
+pagination:
+  enabled: true
+  per_page: 9
+  permalink: "/page/:num/"
+  
 autopages:
   enabled: true
 
