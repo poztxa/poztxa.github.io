@@ -87,9 +87,16 @@ social:
 
 # Plugins
 plugins: 
-- jekyll-paginate
-- jekyll-paginate-categories
 - jekyll-sitemap
 - jekyll-feed
 - jekyll-seo-tag
+- jekyll-postcss
+- jekyll-minifier
 - jekyll-archives
+- jekyll-hostname
+- jekyll-paginate-v2
+- jekyll-loading-lazy
+- jekyll-redirect-from
+- jekyll-auto-authors
+- jekyll-url-metadata
+- jekyll-include-cache
